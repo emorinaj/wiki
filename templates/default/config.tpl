@@ -1,6 +1,4 @@
 <!-- BEGIN header -->
-
-<SCRIPT language=JavaScript src="jinn/js/display_func.js" type=text/javascript></script>
 <form name=frm method="POST" action="{action_url}">
 <table border="0" align="left">
    <tr bgcolor="{th_bg}">
@@ -79,7 +77,8 @@
 <td>
 <select name="newsettings[AutoconvertPages]">
 <option value="auto"{selected_AutoconvertPages_auto}>{lang_Only_if_browser_supports_a_richtext-editor}</option>
-<option value="never"{selected_AutoconvertPages_never}>{lang_No_never}</option>
+<option value="onrequest"{selected_AutoconvertPages_onrequest}>{lang_No_only_on_request}</option>
+<option value="never"{selected_AutoconvertPages_never}>{lang_No_never} {lang_(don't_offer_the_possibility)}</option>
 <option value="always"{selected_AutoconvertPages_always}>{lang_Yes_always}</option>
 </select>
 </td>
