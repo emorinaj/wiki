@@ -824,6 +824,8 @@ the new code generates only one query, by using the fact the time == supercede f
 		}
 		else
 		{
+			$result = $this->db->Record;
+
 			$result[0] = time()-$result[0];
 			if ($result[0]  < 0)
 			{ 
