@@ -205,6 +205,10 @@ class soWikiPage
 		{
 			$query .= " AND lang=".$this->db->quote($this->lang);
 		}
+		else
+		{
+			$query .= ' AND lang IN ('.$this->db->column_data_implode(',',$this->use_langs,False).')';
+		}
 		if($this->version != -1)
 		{
 			$query .= " AND version=".$this->db->quote($this->version,'int');
