@@ -1,0 +1,112 @@
+(don't offer the possibility)	admin	gl	(non ofrecer a posibilidade)
+<em>but</em> display at least this many entries in recentchanges and other subscription lists:	wiki	gl	<em>Mais</em> mostrar polo menos estas entradas en Modificacións recentes e outras listas de subscrición:
+add document to category	wiki	gl	Engadir documento á categoría
+added	wiki	gl	Engadido
+administration features are disabled for this wiki.	wiki	gl	As funcionalidades de administración están desactivadas para este wiki
+admins	wiki	gl	administradores
+after how many days should old versions of a page be removed (0 for never)	admin	gl	Despois de cantos días deben eliminarse as versións antigas dunha páxina (0 para nunca)?
+allow anonymous access	admin	gl	permitir acceso anónimo
+anonymous password	admin	gl	Contrasinal anónimo
+anonymous session type	admin	gl	Tipo de sesión anónimo
+anonymous username	admin	gl	usuario anónimo
+automatically convert pages with wiki-syntax to richtext (if edited)?	admin	gl	Desexa converter páxinas automaticamente con sintaxe de wiki a texto enriquecido (se se editan)?
+block	wiki	gl	Bloquear
+block / unblock hosts	common	gl	Bloquear / Desbloquear servidores
+blocked ip address ranges	wiki	gl	Intervalos de enderezos IP bloqueados
+cancel without saving	wiki	gl	Cancelar sen gardar
+changed	wiki	gl	Modificada
+changes by last author	wiki	gl	Modificacións feitas polo último autor
+choose your current time here, so the server may figure out what time zone you are in.	wiki	gl	Escolla aquí a hora actual, para que o servidor poida calcular o seu fuso horario
+columns	wiki	gl	Columnas
+compute difference	wiki	gl	Calcular diferenza
+converts the page to richtext	wiki	gl	Converte a páxina a texto enriquecido
+current version	wiki	gl	Versión actual
+deleted	wiki	gl	Eliminada
+deletes this page	wiki	gl	Elimina esta páxina
+difference between versions	wiki	gl	Diferenza entre versións
+differences in	wiki	gl	Diferenzas en
+different languages can have different titles	wiki	gl	Pode haber diferentes títulos en distintos idiomas
+document last modified	wiki	gl	Última modificación do documento
+edit box	wiki	gl	Caixa de edición
+edit this <em>archive version</em> of this document	wiki	gl	Editar esta <em>VERSIÓN DO ARQUIVO</em> deste documento
+edit this document	wiki	gl	Editar este documento
+edit with preview	admin	gl	Editar con previsualización
+editable	admin	gl	editable
+editing	wiki	gl	Edición de
+emailaddress administrator	admin	gl	Correo electrónico do administrador
+enable free links	admin	gl	Activar ligazóns libres
+enable wiki links	admin	gl	Activar ligazóns wiki
+enter here the maximum number of entries to display in a document's history list.	wiki	gl	Introduza aquí o número máximo de entradas para mostrar no historial dun documento
+enter here the number of days of edits to display on recentchanges or any other subscription list.  set this to zero if you wish to see all pages in recentchanges, regardless of how recently they were edited.	wiki	gl	Introduza aquí o número de días de edicións para mostrar en Modificacións recentes ou calquera outra lista de subscrición. Defínao como cero se desexa ver todas as páxinas, independentemente de se foron editadas recentemente.
+enter ip address range in form <tt>12.*</tt>, <tt>34.56.*</tt>, or <tt>78.90.123.*</tt>	wiki	gl	Introduza o intervalo de enderezos IP en formato <tt>12.*</tt>, <tt>34.56.*</tt>, ou <tt>78.90.123.*</tt>
+error creating temporary file.	wiki	gl	Erro ao crear o ficheiro temporal
+error writing to temporary file.	wiki	gl	Erro ao escribir o ficheiro temporal
+everyone	wiki	gl	todos
+find	wiki	gl	Localizar
+history	wiki	gl	historial
+history display should show <em>all</em> changes made by the latest author.  otherwise, show only the last change made.	wiki	gl	O historial debe mostrar <em>todas</em> as modificacións realizadas polo último autor. Caso contrario, mostrar unicamente a modificación máis recente.
+history lists	wiki	gl	Listas de historial
+history of	wiki	gl	Historial de
+interwikiprefix	admin	gl	Prefixo InterWiki
+invalid page name.	wiki	gl	O nome da páxina non é válido
+load	wiki	gl	Cargar
+loads the named page in the given language, all change so far get lost !!!	wiki	gl	Carga a páxina con nome no idioma indicado, por tanto, pérdense todas as modificacións
+lock / unlock pages	common	gl	Bloquear / Desbloquear páxinas
+locked	wiki	gl	Bloqueada
+name wiki home link	admin	gl	nome da ligazón da páxina principal do wiki
+newer	wiki	gl	Máis recente
+no never	admin	gl	Non, nunca
+no only on request	admin	gl	Non, só se se pide
+not set	wiki	gl	non definido
+older	wiki	gl	Máis antigo
+on all pages	wiki	gl	en todas as páxinas
+only if browser supports a richtext-editor	admin	gl	Só se o explorador soporta un editor de texto enriquecido
+only on the first page	wiki	gl	só na primeira páxina
+page '%1' not found !!!	wiki	gl	Páxina '%1' non localizada
+path of the upload directory (has to be writable by the webserver!)	admin	gl	Camiño ao directorio de transferencia de ficheiros (o servidor web debe ter dereito de escrita)
+picture upload via richtext editor (leave the upload directory empty to disable the upload)	admin	gl	Cargar ficheiros co editor de texto enriquecido (deixar o directorio de transferencia en branco para desactivar)
+please contact the %1administrator%2 for assistance.	wiki	gl	Contacte co %1Administrador%2 para obter axuda.
+preview	wiki	gl	Previsualización
+preview of current version	wiki	gl	Previsualización da versión actual
+rate control / ip blocking disabled	wiki	gl	O control de clasificación ou bloqueo de IP está desactivado
+readable by	wiki	gl	Lexible por
+readonly	admin	gl	só de lectura
+recent changes	wiki	gl	Modificacións recentes
+renames page to the given name and language	wiki	gl	Renomea a páxina ao nome e idioma indicados
+richtext	wiki	gl	Texto enriquecido
+rows	wiki	gl	Filas
+save the changes and exit	wiki	gl	Gardar as modificacións e saír
+saves and continues editing	wiki	gl	Garda e continúa a editar
+search for	wiki	gl	Buscar
+see complete list (%1 entries)	wiki	gl	Ver a lista completa (%1 entradas)
+show a search	wiki	gl	Mostrar unha busca
+show the title of the wiki page	wiki	gl	Mostrar o título da páxina do wiki
+site configuration	wiki	gl	Configuración do sitio
+summary	wiki	gl	Resumo
+summary of change	wiki	gl	Resumo de modificacións
+the search returned no result!	wiki	gl	A busca non devolveu resultados
+this page can not be edited.	wiki	gl	Non é posible editar esta páxina
+twin pages	wiki	gl	Páxinas xemelgas
+unblock	wiki	gl	Desbloquear
+updates the preview	wiki	gl	Actualiza a previsualización
+url of the upload directory	admin	gl	URL do directorio de transferencia de ficheiros
+use this module for displaying wiki-pages	wiki	gl	Utilice este módulo para mostrar as páxinas do wiki
+users	wiki	gl	usuarios
+view document history	wiki	gl	Ver o historial do documento
+visit %1 to set your user name	wiki	gl	Visite %1 para definir o nome de usuario
+warning: since you started editing, this document has been changed by someone else.  please merge your edits into the current version of this document.	wiki	gl	Aviso: desde que comezou a editar, este documento foi modificado por outra persoa. Combine as súas modificacións coa versión actual deste documento.
+who should be able to edit this page	wiki	gl	quen ten permiso para editar esta páxina
+who should be able to read this page	wiki	gl	quen ten permiso para ler esta páxina
+wiki	common	gl	Wiki
+wiki administration	wiki	gl	Administración do wiki
+wiki menu	wiki	gl	Menú do wiki
+wiki startpage	wiki	gl	Páxina de inicio do wiki
+writable by	wiki	gl	Escribible por
+yes always	admin	gl	Si, sempre
+yes with navbar	admin	gl	Si, con barra de navegación
+you have been denied access to this site.	wiki	gl	Acceso negado a este sitio
+you have entered an invalid user name.	wiki	gl	Introduciu un nome de usuario que non é válido
+you have exeeded the number of pages you are allowed to visit in a given period of time. please return later.	wiki	gl	Excedeu o número de páxinas que é permitido visitar durante un período de tempo. Tente máis tarde.
+you have no rights to view wiki content !!!	wiki	gl	Non posúe dereitos de visualización do contido do wiki
+your changes	wiki	gl	A súas modificacións
+your user name is "%1".	wiki	gl	O seu nome de usuario é "%1".
