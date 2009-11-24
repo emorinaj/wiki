@@ -42,8 +42,8 @@ If you like, enclose it in brackets to create a numbered reference and avoid clu
 
 Or you can have a description instead of a numbered reference; {{```[http://www.php.net/manual/en/ PHP Manual]```}} becomes [http://www.php.net/manual/en/ PHP Manual]
 ----
-You can put a picture in a page by typing the URL to the picture (it must end in gif, jpg, or png).  For example, {{```http://www.egroupware.org/egroupware/phpgwapi/templates/idots/images/logo.png```}} becomes
-http://www.egroupware.org/egroupware/phpgwapi/templates/idots/images/logo.png
+You can put a picture in a page by typing the URL to the picture (it must end in gif, jpg, or png).  For example, {{```http://www.egroupware.org/egroupware/phpgwapi/templates/default/images/logo.png```}} becomes
+http://www.egroupware.org/egroupware/phpgwapi/templates/default/images/logo.png
 ----
 There are 2 possibilities for '''code formatting''':
 {{'''{{\$is_admin = \$GLOBALS['egw_info']['user']['apps']['admin'];}}'''}}
@@ -144,6 +144,41 @@ You can create tables using pairs of vertical bars:
 || cell four || cell five ||
 || cell six || here's a very long cell ||
 </code>
+----
+You can create anchors with the Macro:
+<code>
+[[Anchor ANCHORNAME]]
+</code>
+You can jump to that Anchor with:
+<code>
+((PageName|Jump to Anchor #ANCHORNAME))
+</code>
+----
+=== Curly Options ===
+only supported with tables right now
+<code>
+||{s=background:red}  CurlyOptions ||{s=color:blue;font-variant:small-caps;font-size:large} some text||
+</code>
+||{s=background:red}  CurlyOptions ||{s=color:blue;font-variant:small-caps;font-size:large} some text||
+<code>
+||{Tb=0,s=background:red;color:blue;font-variant:small-caps;font-size:large} some blue text on red ground||
+</code>
+||{Tb=0,s=background:red;color:blue;font-variant:small-caps;font-size:large} some blue text on red ground||
+<code>
+||{Tb=0,s=color:red;font-variant:small-caps;font-size:large} some red text||
+</code>
+||{Tb=0,s=color:red;font-variant:small-caps;font-size:large} some red text||
+----
+=== HTML Formatting ===
+<code>
+<html>
+<b> more </b> <font color=\"red\">to</font> <b>come</b>
+</html>
+</code>
+displays as:
+<html>
+<b> more </b> <font color=\"red\">to</font> <b>come</b>
+</html>
 ",
 	) as $name => $body)
 	{
