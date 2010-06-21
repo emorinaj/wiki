@@ -1,6 +1,6 @@
 <?php
 /* $Id$ */
-
+error_log(array2string(function_backtrace()));
 // Under EGroupware these URL's are NOT configurable, you can set the webserver_url in setup
 $ScriptBase = $GLOBALS['egw']->link('/wiki/index.php');
 $ScriptBase .= strpos($ScriptBase,'?') !== false ? '&' : '?';
