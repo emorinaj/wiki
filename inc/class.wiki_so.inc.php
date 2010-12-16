@@ -131,9 +131,13 @@ class soWikiPage
 		$filter = array_merge($filter,$this->memberships);
 
 		$sql = '('.($add_wiki_id ? " wiki_id=$this->wiki_id AND " : '').
-			($table ? $table.'.' : '').
-			($readable ? 'wiki_readable' : 'wiki_writable').' IN ('.implode(',',$filter).'))';
-
+			($table ? $table.'.' : '');
+		if($readable)
+		{
+			$sql .= 'wiki_readable IN ('.implode(',',$filter).')';
+		}
+		// Writable implies readable
+		$sql .= ($readable ? ' OR ' : ' ') . 'wiki_writable IN ('.implode(',',$filter).'))';
 		if ($this->debug) echo "<p>sowiki::acl_filter($readable,$add_wiki_id) = '$sql'</p>\n";
 
 		return $filters[$filter_id] = $sql;
@@ -158,19 +162,37 @@ class soWikiPage
 		{
 			return False;	// Global config overrides page-specific setting
 		}
-		switch ($acl = $readable ? $this->readable : $this->writable)
+
+		$writable = False;
+		switch($this->writable) {
+			case WIKI_ACL_ALL:
+				$writable = True;
+				break;
+			case WIKI_ACL_USER:
+				$writable = $GLOBALS['egw_info']['user']['account_lid'] !=  $this->config['anonymous_username'];
+				break;
+			case WIKI_ACL_ADMIN:
+				$writable = isset($GLOBALS['egw_info']['user']['apps']['admin']);
+				break;
+			default:
+				$writable =  in_array($this->writable, $this->memberships);
+		}
+		if(!$readable) return $writable;
+
+		// Writable implies readable
+		switch ($this->readable)
 		{
 			case WIKI_ACL_ALL:
 				return True;
 
 			case WIKI_ACL_USER:
-				return $GLOBALS['egw_info']['user']['account_lid'] !=  $this->config['anonymous_username'];
+				return $writable || ($GLOBALS['egw_info']['user']['account_lid'] !=  $this->config['anonymous_username']);
 
 			case WIKI_ACL_ADMIN:
-				return  isset($GLOBALS['egw_info']['user']['apps']['admin']);
+				return $writable || isset($GLOBALS['egw_info']['user']['apps']['admin']);
 
 			default:
-				return in_array($acl,$this->memberships);
+				return $writable || in_array($this->readable,$this->memberships);
 		}
 		return False;
 	}
