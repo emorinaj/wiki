@@ -192,6 +192,24 @@ class wiki_ui extends wiki_bo
 			WIKI_ACL_USER =>  lang('users'),
 			WIKI_ACL_ADMIN => lang('admins'),
 		);
+		if ($pg->read() === False)	// new entry
+		{
+			$pg->lang = $GLOBALS['egw_info']['user']['preferences']['common']['lang'];
+			foreach(array('readable' => 'default_read', 'writable' => 'default_write') as $attr => $pref)
+			{
+				if($GLOBALS['egw_info']['user']['preferences']['wiki'][$pref])
+				{
+					$pref = explode(',',$GLOBALS['egw_info']['user']['preferences']['wiki'][$pref]);
+
+					// Preference excludes user!
+					if(count(array_intersect($pg->memberships, $pref)) == 0 && count(array_intersect(array_keys($acl_values), $pref)) == 0)
+					{
+						$pref[] = $GLOBALS['egw_info']['user']['account_primary_group'];
+					};
+					$content[$attr] = $pref;
+				}
+			}
+		}
 		$this->tpl->read('wiki.edit');
 
 		if ($content['is_html'] || $this->AutoconvertPages == 'never' || !html::htmlarea_availible())
