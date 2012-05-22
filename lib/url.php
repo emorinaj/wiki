@@ -2,6 +2,7 @@
 /* $Id$ */
 
 // Under EGroupware these URL's are NOT configurable, you can set the webserver_url in setup
+if (!method_exists($GLOBALS['egw'], 'link')) throw new egw_exception_assertion_failed('undefined method egw::link()!');
 $ScriptBase = $GLOBALS['egw']->link('/wiki/index.php');
 $ScriptBase .= strpos($ScriptBase,'?') !== false ? '&' : '?';
 
