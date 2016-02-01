@@ -5,23 +5,12 @@
  * @link http://www.egroupware.org
  * @package wiki
  * @author Ralf Becker <RalfBecker-AT-outdoor-training.de>
- * @copyright (C) 2004-8 by RalfBecker-AT-outdoor-training.de
+ * @copyright (C) 2004-16 by RalfBecker-AT-outdoor-training.de
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
  * @version $Id$
  */
 
-if (!function_exists('var2xml'))
-{
-	if (file_exists(EGW_API_INC.'class.xmltool.inc.php'))
-	{
-		include_once(EGW_API_INC.'class.xmltool.inc.php');
-	}
-	else
-	{
-		include_once(EGW_INCLUDE_ROOT.'/etemplate/inc/class.xmltool.inc.php');
-	}
-}
-
+include_once(EGW_INCLUDE_ROOT.'/etemplate/inc/class.xmltool.inc.php');
 
 /**
  * XML Import & Export
@@ -65,9 +54,9 @@ class wiki_xml extends wiki_bo
 				//echo "continue as page[lang]=$page[lang] not in ".print_r($lang,True)."<br>\n";
 				continue;	// wrong language or not modified since $modified
 			}
-			$page = $this->page($page);	// read the complete page
-			$page->read();
-			$page = $page->as_array();
+			$page_obj = $this->page($page);	// read the complete page
+			$page_obj->read();
+			$page = $page_obj->as_array();
 			unset($page['wiki_id']);		// we dont export the wiki-id
 
 			if ($modified && $modified > $page['time'])
@@ -76,10 +65,8 @@ class wiki_xml extends wiki_bo
 				continue;	// not modified since $modified
 			}
 
-			$page = $GLOBALS['egw']->translation->convert($page,$GLOBALS['egw']->translation->charset(),'utf-8');
-
 			$xml_page = new xmlnode('page');
-			foreach($page as $attr => $val)
+			foreach(translation::convert($page, translation::charset(), 'utf-8') as $attr => $val)
 			{
 				if ($attr != 'text')
 				{
@@ -121,21 +108,12 @@ class wiki_xml extends wiki_bo
 	{
 		if (substr($url,0,4) == 'http')
 		{
-			// use our network class, as it deals with proxies and the proxy-config in admin->configuration
-			$network =& CreateObject('phpgwapi.network');
-			$xmldata = $network->gethttpsocketfile($url);
-			$xmldata = @strstr(implode('',$xmldata),'<?xml');	// discard everything before the start of the xml-file
+			// use proxy-config from admin >> configuration
+			$xmldata = file_get_contents($url, 0, egw_framework::proxy_context());
 		}
 		else
 		{
-			if (function_exists('file_get_contents'))
-			{
-				$xmldata = file_get_contents($url);
-			}
-			elseif (($xmldata = file($url)) !== False)
-			{
-				$xmldata = implode('',$xmldata);
-			}
+			$xmldata = file_get_contents($url);
 		}
 		//echo '<pre>'.htmlspecialchars($xmldata)."</pre>\n";
 		if (!$xmldata)
@@ -145,6 +123,7 @@ class wiki_xml extends wiki_bo
 		$parser = xml_parser_create();
 		xml_parser_set_option($parser, XML_OPTION_CASE_FOLDING, 0);
 		xml_parser_set_option($parser, XML_OPTION_SKIP_WHITE,   0);	// need to be off, else it eats our newlines
+		$vals = null;
 		xml_parse_into_struct($parser, $xmldata, $vals);
 		xml_parser_free($parser);
 
@@ -169,7 +148,7 @@ class wiki_xml extends wiki_bo
 					// fall through
 				case 'cdata':
 					$wiki_page['text'] = trim($val['value']);
-					$wiki_page = $GLOBALS['egw']->translation->convert($wiki_page,'utf-8');
+					$wiki_page = translation::convert($wiki_page,'utf-8');
 					if ($this->write($wiki_page,False))
 					{
 						if ($debug_messages)
