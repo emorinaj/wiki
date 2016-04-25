@@ -6,6 +6,7 @@ administration features are disabled for this wiki.	wiki	en	Administration featu
 admins	wiki	en	Admins
 after how many days should old versions of a page be removed (0 for never)	admin	en	After how many days should old versions of a page be removed, 0 = never.
 allow anonymous access	admin	en	Allow anonymous access
+allow creating new pages (blank for all)	wiki	en	Allow creating new pages (blank for all)
 anonymous password	admin	en	Anonymous password
 anonymous session type	admin	en	Anonymous session type
 anonymous username	admin	en	Anonymous user name

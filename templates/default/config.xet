@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE overlay PUBLIC "-//Stylite AG//eTemplate 2//EN" "http://www.egroupware.org/etemplate2.dtd">
+<!-- $Id$ -->
+<overlay>
+	<template id="wiki.config" template="" lang="" group="0" version="16.1">
+		<grid width="100%" class="admin-config egwGridView_grid">
+			<columns>
+				<column width="60%"/>
+				<column/>
+			</columns>
+			<rows>
+				<row>
+					<description value="name wiki home link" label="%s:"/>
+					<textbox id="newsettings[wikihome]" size="30"/>
+				</row>
+				<row>
+					<description value="allow anonymous access" label="%s:"/>
+					<select id="newsettings[allow_anonymous]">
+						<option value="">No</option>
+						<option value="True">Yes</option>
+						<option value="Navbar">Yes with navbar</option>
+					</select>
+				</row>
+				<row>
+					<description value="Anonymous Session Type" label="%s:"/>
+					<select id="newsettings[Anonymous_Session_Type]">
+						<option value="readonly">readonly</option>
+						<option value="editable">editable</option>
+					</select>
+				</row>
+				<row>
+					<description value="anonymous username" label="%s:"/>
+					<textbox id="newsettings[anonymous_username]" size="30"/>
+				</row>
+				<row>
+					<description value="Anonymous password" label="%s:"/>
+					<textbox id="newsettings[anonymous_password]" size="30"/>
+				</row>
+				<row>
+					<description value="Allow creating new pages (blank for all)" label="%s:"/>
+					<select-account id="newsettings[new_page_permission]" account_type="groups" multiple="true" tags="true" width="100%">
+						<option value="_0">Everyone</option>
+						<option value="_1">Users</option>
+						<option value="_2">Admins</option>
+					</select-account>
+				</row>
+				<row>
+					<description value="Emailaddress Administrator" label="%s:"/>
+					<textbox id="newsettings[emailadmin]" size="30"/>
+				</row>
+				<row>
+					<description value="InterWikiPrefix" label="%s:"/>
+					<textbox id="newsettings[InterWikiPrefix]" size="30"/>
+				</row>
+				<row>
+					<description value="Enable Free Links" label="%s:"/>
+					<select id="newsettings[Enable_Free_Links]">
+						<option value="True">Yes</option>
+						<option value="False">No</option>
+					</select>
+				</row>
+				<row>
+					<description value="Enable Wiki Links" label="%s:"/>
+					<select id="newsettings[Enable_Wiki_Links]">
+						<option value="True">Yes</option>
+						<option value="False">No</option>
+					</select>
+				</row>
+				<row>
+					<description value="Automatically convert pages with wiki-syntax to richtext (if edited)?" label="%s:"/>
+					<select id="newsettings[AutoconvertPages]">
+						<option value="auto">Only if browser supports a richtext-editor</option>
+						<option value="onrequest">No only on request</option>
+						<option value="never">{No never} {(don't offer the possibility)}</option>
+						<option value="always">Yes always</option>
+					</select>
+				</row>
+				<row>
+					<description value="After how many days should old versions of a page be removed (0 for never)" label="%s:"/>
+					<textbox id="newsettings[ExpireLen]" size="5"/>
+				</row>
+			</rows>
+		</grid>
+	</template>
+</overlay>

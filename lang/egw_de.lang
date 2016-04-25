@@ -6,6 +6,7 @@ administration features are disabled for this wiki.	wiki	de	Administrationszugan
 admins	wiki	de	Administratoren
 after how many days should old versions of a page be removed (0 for never)	admin	de	Nach wie vielen Tagen sollen alter Versionen einer Seite gelöscht werden (0 für niemals)
 allow anonymous access	admin	de	Anonymen Zugriff erlauben
+allow creating new pages (blank for all)	wiki	de	Erlaube neue Seiten anzulegen (leer für alle)
 anonymous password	admin	de	Passwort des anonymen Benutzers
 anonymous session type	admin	de	Typ der anonymen Sitzung
 anonymous username	admin	de	Benutzername des anonymen Benutzers
@@ -74,6 +75,7 @@ page '%1' not found !!!	wiki	de	Seite '%1' nicht gefunden !!!
 page content	wiki	de	Seiteninhalt
 pages i have read access	wiki	de	Seiten, zu denen ich Leseberechtigung besitze
 pages i have write access	wiki	de	Seiten, zu denen ich Schreibberechtigung besitze
+pages that match this regular expression	wiki	de	Seiten die folgendem regulären Ausdruck entsprechen
 path of the upload directory (has to be writable by the webserver!)	admin	de	Pfad des Verzeichnisses zum Hochladen (muß vom Webserver beschreibbar sein!)
 person who changed the page	wiki	de	Die Person, die diese Seite verändert hat
 picture upload via richtext editor (leave the upload directory empty to disable the upload)	admin	de	Hochladen von Bildern über den Editor für formatierten Text (das Verzeichnis leer lassen um das Hochladen abzuschalten)

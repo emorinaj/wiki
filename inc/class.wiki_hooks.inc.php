@@ -141,7 +141,7 @@ $$Content$$'
 	{
 		$title = $appname = 'wiki';
 		$file = Array(
-			'Site Configuration' => egw::link('/index.php','menuaction=admin.uiconfig.index&appname=' . $appname),
+			'Site Configuration' => egw::link('/index.php','menuaction=admin.admin_config.index&appname=' . $appname.'&ajax=true'),
 		//	'Lock / Unlock Pages' => $GLOBALS['egw']->link('/wiki/index.php','action=admin&locking=1'),
 			'Block / Unblock hosts' => egw::link('/wiki/index.php','action=admin&blocking=1'),
 			array(
@@ -173,7 +173,7 @@ $$Content$$'
 		{
 			$menu_title = lang('Wiki Administration');
 			$file = Array(
-				'Site Configuration' => $GLOBALS['egw']->link('/index.php','menuaction=admin.uiconfig.index&appname=' . $appname),
+				'Site Configuration' => $GLOBALS['egw']->link('/index.php','menuaction=admin.admin_config.index&appname=' . $appname.'&ajax=true'),
 			//	'Lock / Unlock Pages' => $GLOBALS['egw']->link('/wiki/index.php','action=admin&locking=1'),
 				'Block / Unblock Hosts' => $GLOBALS['egw']->link('/wiki/index.php','action=admin&blocking=1')
 			);
@@ -271,26 +271,4 @@ $$Content$$'
 		$message = "$i Pages processed. $l Links inserted (or count updated).";
 		return $message;
 	}
-
-	/**
-         * Hook returning options for new_page_permission groups
-         *
-         * @param array $config
-         */
-        public static function hook_new_page_permission($config)
-        {
-		// Definitions in wiki_so
-		$groups = array(
-			'_0' =>   lang('everyone'),
-			'_1' =>  lang('users'),
-			'_2' => lang('admins'),
-		);
-		$accs = $GLOBALS['egw']->accounts->get_list('groups');
-		foreach($accs as $acc)
-		{
-			$groups[$acc['account_id']] = lang('group').' '.$acc['account_lid'];
-		}
-		return html::select('newsettings[new_page_permission]',$config['new_page_permission'],
-                        $groups,true,'',4);
-        }
 }
