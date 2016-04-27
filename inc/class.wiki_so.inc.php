@@ -505,7 +505,7 @@ class wiki_so	// DB-Layer
 			" FROM $this->PgTbl AS t1, (select wiki_id,wiki_lang,wiki_name, max(wiki_version) as wiki_version  from $this->PgTbl GROUP BY wiki_id, wiki_lang, wiki_name) AS t2".
 			" WHERE t1.wiki_name=t2.wiki_name AND t1.wiki_lang=t2.wiki_lang AND t1.wiki_id=$this->wiki_id AND t2.wiki_id=$this->wiki_id".
 			"  AND ".$sowikipage->acl_filter(true,false,'t1').	// only include pages we are allowed to read!
-			" GROUP BY t1.wiki_name,t1.wiki_lang,t1.wiki_version,t1.wiki_title,t1.wiki_body".
+			" GROUP BY t1.wiki_name,t1.wiki_lang,t1.wiki_version,t1.wiki_title,t1.wiki_body,t1.wiki_comment".
 			" HAVING t1.wiki_version=MAX(t2.wiki_version) AND (";
 
 		$search_in = $search_in ? explode(',',$_search_in) : array('t1.wiki_name','t1.wiki_title','t1.wiki_body','t1.wiki_comment');
