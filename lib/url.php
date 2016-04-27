@@ -1,23 +1,24 @@
 <?php
 /* $Id$ */
 
+use EGroupware\Api\Egw;
+
 // Under EGroupware these URL's are NOT configurable, you can set the webserver_url in setup
-if (is_object($GLOBALS['egw']) && ($GLOBALS['egw'] instanceof egw))
+if (is_object($GLOBALS['egw']) && ($GLOBALS['egw'] instanceof Egw))
 {
-	if (!method_exists($GLOBALS['egw'], 'link')) throw new egw_exception_assertion_failed('undefined method egw::link()!');
-	$ScriptBase = $GLOBALS['egw']->link('/wiki/index.php');
+	$ScriptBase = Egw::link('/wiki/index.php');
 	$ScriptBase .= strpos($ScriptBase,'?') !== false ? '&' : '?';
 
 	$AdminScript = $ScriptBase . 'action=admin';
 
 	//if(!isset($ViewBase))
-		{ $ViewBase    = $GLOBALS['egw']->link('/index.php',array('menuaction'=>'wiki.wiki_ui.view')). '&page='; }
+		{ $ViewBase    = Egw::link('/index.php',array('menuaction'=>'wiki.wiki_ui.view')). '&page='; }
 	//if(!isset($EditBase))
-		{ $EditBase    = $GLOBALS['egw']->link('/index.php',array('menuaction'=>'wiki.wiki_ui.edit')).'&page='; }
+		{ $EditBase    = Egw::link('/index.php',array('menuaction'=>'wiki.wiki_ui.edit')).'&page='; }
 	//if(!isset($HistoryBase))
 		{ $HistoryBase = $ScriptBase . 'action=history&page='; }
 	//if(!isset($FindScript))
-		{ $FindScript  = $GLOBALS['egw']->link('/index.php',array('menuaction'=>'wiki.wiki_ui.search')); }
+		{ $FindScript  = Egw::link('/index.php',array('menuaction'=>'wiki.wiki_ui.search')); }
 	//if(!isset($FindBase))
 		{ $FindBase    = $FindScript . '&search='; }
 	//if(!isset($SaveBase))
@@ -110,5 +111,3 @@ if(!function_exists('saveURL'))
 		return $SaveBase . urlencode($page);
 	}
 }
-
-?>
