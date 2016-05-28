@@ -5,10 +5,12 @@
  * @link http://www.egroupware.org
  * @package wiki
  * @author Ralf Becker <RalfBecker-AT-outdoor-training.de>
- * @copyright (C) 2004-9 by RalfBecker-AT-outdoor-training.de
+ * @copyright (C) 2004-16 by RalfBecker-AT-outdoor-training.de
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
  * @version $Id$
  */
+
+use EGroupware\Api;
 
 /**
  * Static hooks for wiki
@@ -22,26 +24,17 @@ class wiki_hooks
 	 */
 	static public function settings($hook_data)
 	{
+		unset($hook_data);	// not used
+
 		$options = array(
 			// Defines not defined here
 			/*WIKI_ACL_ALL*/  '_0' => lang('everyone'),
 			/*WIKI_ACL_USER*/ '_1' => lang('users'),
 			/*WIKI_ACL_ADMIN*/'_2' => lang('admins'),
 		);
-		$accs = $GLOBALS['egw']->accounts->get_list('groups');
-		foreach($accs as $acc)
+		foreach($GLOBALS['egw']->accounts->search(array('type' => 'groups')) as $acc)
 		{
-			if ($acc['account_type'] == 'u')
-			{
-				$options[$acc['account_id']] = common::grab_owner_name($acc['account_id']);
-			}
-		}
-		foreach($accs as $acc)
-		{
-			if ($acc['account_type'] == 'g' && (!$owngroups || ($owngroups && in_array($acc['account_id'],(array)$mygroups))))
-			{
-				$options[$acc['account_id']] = common::grab_owner_name($acc['account_id']);
-			}
+			$options[$acc['account_id']] = Api\Accounts::format_username($acc);
 		}
 		$settings = array(
 			'default_read' => array(
