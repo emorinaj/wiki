@@ -236,4 +236,6 @@ Include the text of an other wikipage:
 		),false,__LINE__,__FILE__,'wiki');
 	}
 
-
+// give Default group rights for wiki
+$defaultgroup = $GLOBALS['egw_setup']->add_account('Default','Default','Group',False,False);
+$GLOBALS['egw_setup']->add_acl('wiki','run',$defaultgroup);
