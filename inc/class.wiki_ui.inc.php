@@ -126,7 +126,7 @@ class wiki_ui extends wiki_bo
 			{
 				case 'delete':
 					//error_log(__METHOD__.array2string($content));
-					if (trim($content['text'])=='' || (trim($content['text'])=='##EXPUNGE##' && trim($content['summary'])=='##EXPUNGE##'))
+					if (($content['is_html']&&trim(translation::convertHTMLToText($content['text']))=='')||trim($content['text'])=='' || (trim($content['text'])=='##EXPUNGE##' && trim($content['summary'])=='##EXPUNGE##'))
 					{
 						$content['text']='##EXPUNGE##';
 						$content['comment'] = '##EXPUNGE##';
