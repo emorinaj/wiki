@@ -9,7 +9,7 @@
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
  * @version $Id$
  */
-
+use EGroupware\Api\Etemplate;
 class wiki_ui extends wiki_bo
 {
 	var $public_functions = array(
