@@ -31,7 +31,7 @@
 					</hbox>
 				</row>
 				<row class="row" disabled="!@is_html">
-					<htmlarea id="text" mode="$cont[rtfEditorFeatures]" height="320px" width="100%" expand_toolbar="true" base_href="$cont[upload_dir]" span="all"/>
+					<htmlarea id="text" options="@rtfEditorFeatures" height="320px" width="100%" expand_toolbar="true" base_href="$cont[upload_dir]" span="all"/>
 				</row>
 				<row disabled="@is_html">
 					<textbox multiline="true" id="text" rows="15" cols="120" span="all"/>

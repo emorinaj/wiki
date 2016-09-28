@@ -108,6 +108,7 @@ class wiki_ui extends wiki_bo
 		}
 		if ($content['is_html'])
 		{
+			$content['rtfEditorFeatures'] = $GLOBALS['egw_info']['user']['preferences']['common']['rte_features'];
 			// some tavi stuff need to be at the line-end
 			$content['text'] = preg_replace(array('/(.+)(<br \\/>)/i',"/(<br \\/>\n?)+$/i"),array("\\1\n\\2",''),$content['text']);
 
