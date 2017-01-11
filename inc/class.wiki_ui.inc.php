@@ -65,6 +65,7 @@ class wiki_ui extends wiki_bo
 
 		if (!is_array($content))
 		{
+			$content = array();
 			$content['name'] = $content ? $content : html_entity_decode($_GET['page']);
 			$content['lang'] = $_GET['lang'];
 			$content['version'] = $_GET['version'];
