@@ -9,7 +9,9 @@
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
  * @version $Id$
  */
-use EGroupware\Api\Etemplate;
+
+use EGroupware\Api;
+
 class wiki_ui extends wiki_bo
 {
 	var $public_functions = array(
@@ -51,6 +53,9 @@ class wiki_ui extends wiki_bo
 				$_GET[$name] = stripslashes($val);
 			}
 		}
+
+		// load app.js to automatic add target _blank to external links
+		Api\Framework::includeJS('/wiki/js/app.js');
 	}
 
 	function uiwiki()
