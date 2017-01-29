@@ -1,17 +1,14 @@
 <?php
-/**************************************************************************\
-* eGroupWare Wiki - UserInterface                                       *
-* http://www.egroupware.org                                                *
-* -------------------------------------------------                        *
-* Copyright (C) 2004 RalfBecker@outdoor-training.de                        *
-* --------------------------------------------                             *
-*  This program is free software; you can redistribute it and/or modify it *
-*  under the terms of the GNU General Public License as published by the   *
-*  Free Software Foundation; either version 2 of the License, or (at your  *
-*  option) any later version.                                              *
-\**************************************************************************/
-
-/* $Id$ */
+/**
+ * EGroupware Wiki - Configuration
+ *
+ * @link http://www.egroupware.org
+ * @package wiki
+ * @author Ralf Becker <RalfBecker-AT-outdoor-training.de>
+ * @copyright (C) 2004-17 by RalfBecker-AT-outdoor-training.de
+ * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
+ * @version $Id$
+ */
 
 $GLOBALS['egw_info']['server']['found_validation_hook'] = array('final_validation');
 

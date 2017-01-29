@@ -1,6 +1,6 @@
 <?php
 /**
- * eGroupware Wiki - DB-Layer
+ * EGroupware Wiki - DB-Layer
  *
  * originaly based on WikkiTikkiTavi tavi.sf.net and www.axisgroupware.org:
  * former files lib/pagestore.php + lib/page.php
@@ -11,6 +11,8 @@
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
  * @version $Id$
  */
+
+use EGroupware\Api;
 
 define ('WIKI_ACL_ALL','_0');		// everyone incl. anonymous
 define ('WIKI_ACL_USER','_1');		// everyone BUT anonymous
@@ -58,11 +60,10 @@ class soWikiPage
 	 *  @param object $db db-object
 	 *  @param string $PgTbl name of pages-table
 	 *  @param string $name name of the wiki-page
-	 *  @param string/boolean $lang requested language or False
+	 *  @param string|boolean $lang requested language or False
 	 *  @param int $wiki_id which wiki to use
-	 *  @param int $debug debug-value
 	 */
-	function soWikiPage($db,$PgTbl,$name = '',$lang=False,$wiki_id=0,$debug=0)
+	function soWikiPage($db,$PgTbl,$name = '',$lang=False,$wiki_id=0)
 	{
 		$this->db = $db;		// to have an independent result-pointer
 		$this->db->set_app('wiki');
@@ -91,10 +92,7 @@ class soWikiPage
 		// $GLOBALS['config'] is set by lib/init
 		if (!is_array($GLOBALS['config']))
 		{
-			$c =& CreateObject('phpgwapi.config','wiki');
-			$c->read_repository();
-			$GLOBALS['config'] = $c->config_data;
-			unset($c);
+			$GLOBALS['config'] = Api\Config::read('wiki');
 		}
 		$this->config = &$GLOBALS['config'];
 	}
@@ -104,7 +102,7 @@ class soWikiPage
 	 *
 	 * @param boolean $readable generate SQL for readable or writable filter, default True == readable
 	 * @param boolean $add_wiki_id add code to filter only the actual wiki
-	 * @param string $table='' table to prefix the column, default none
+	 * @param string $table ='' table to prefix the column, default none
 	 * @return string SQL to AND into the query
 	 */
 	function acl_filter($readable = True,$add_wiki_id=True,$table='')
@@ -116,8 +114,6 @@ class soWikiPage
 		{
 			return $filters[$filter_id];
 		}
-		$user = $GLOBALS['egw_info']['user']['account_id'];
-
 		$filter = array(WIKI_ACL_ALL);
 
 		if ($GLOBALS['egw_info']['user']['account_lid'] !=  $GLOBALS['config']['AnonymousUser'])
@@ -128,7 +124,7 @@ class soWikiPage
 		{
 			$filter[] = WIKI_ACL_ADMIN;
 		}
-		$filter = array_merge($filter,$this->memberships);
+		if (true) $filter = array_merge($filter,$this->memberships);
 
 		$sql = '('.($add_wiki_id ? " wiki_id=$this->wiki_id AND " : '');
 		if($readable)
@@ -166,7 +162,7 @@ class soWikiPage
 	 * If we have an anonymous session and the anonymous session-type is NOT editable,
 	 * all pages are readonly (even if their own setting is editable by all) !!!
 	 *
-	 * @param boolean $readable=false check if page is readable or writable, default False == writeable
+	 * @param boolean $readable =false check if page is readable or writable, default False == writeable
 	 * @return boolean true if check was successful, false otherwise
 	 */
 	function acl_check($readable = False)
@@ -191,8 +187,7 @@ class soWikiPage
 			{
 				$create = $create || isset($GLOBALS['egw_info']['user']['apps']['admin']);
 			}
-			$create = $create || count(array_intersect($this->config['new_page_permission'], $this->memberships)) > 0;
-			return $create;
+			return $create || count(array_intersect($this->config['new_page_permission'], $this->memberships)) > 0;
 		}
 		if (!$readable && $this->config['Anonymous_Session_Type'] != 'editable' &&
 			$GLOBALS['egw_info']['user']['account_lid'] == $this->config['anonymous_username'])
@@ -200,10 +195,13 @@ class soWikiPage
 			return False;	// Global config overrides page-specific setting
 		}
 
-		$writable = False;
 		if(in_array(WIKI_ACL_ALL, $this->writable))
 		{
 			$writable = True;
+		}
+		else
+		{
+			$writable = False;
 		}
 		if (in_array(WIKI_ACL_USER, $this->writable))
 		{
@@ -231,8 +229,7 @@ class soWikiPage
 			$writable = $writable || isset($GLOBALS['egw_info']['user']['apps']['admin']);
 		}
 		// eGW group memberships
-		$writable = $writable || count(array_intersect($this->readable,$this->memberships)) > 0;
-		return $writable;
+		return $writable || count(array_intersect($this->readable,$this->memberships)) > 0;
 	}
 
 	/**
@@ -272,7 +269,7 @@ class soWikiPage
 	/**
 	 * Read in a page contents, name and lang was set in the constructor
 	 *
-	 * @param boolean $ignore_acl=false should the page read, even if we have no access-rights, default no
+	 * @param boolean $ignore_acl =false should the page read, even if we have no access-rights, default no
 	 * @return array/boolean contents of the page or False.
 	 */
 	function read($ignore_acl=false)
@@ -350,8 +347,8 @@ class soWikiPage
 	 * Renames a page to a new name and/or lang
 	 *
 	 * The caller is responsible for performing locking.
-	 * @param string/boolean $new_name to rename to or false if only a new language, default false
-	 * @param string/boolean $new_lang to rename to or false if only a new name, default false
+	 * @param string|boolean $new_name to rename to or false if only a new language, default false
+	 * @param string|boolean $new_lang to rename to or false if only a new name, default false
 	 * @return int affected rows, 1=success, 0=not found
 	 */
 	function rename($new_name=False,$new_lang=False)
@@ -374,8 +371,6 @@ class soWikiPage
 				'wiki_name' => $this->name,
 				'wiki_lang' => $this->lang,
 			),__LINE__,__FILE__);
-
-		if ($this->debug) echo "<p>soWikiPage::rename('$new_name','$new_lang') old='$this->name:$this->lang', sql='$sql', sql2='$sql2'</p>";
 
 		if ($new_name !== False) $this->name = $new_name;
 		if ($new_lang !== False) $this->lang = $new_lang;
@@ -405,7 +400,7 @@ class wiki_so	// DB-Layer
 	/**
 	 * private instance of the db class
 	 *
-	 * @var egw_db
+	 * @var Api\Db
 	 */
 	var $db;
 	var $LkTbl = 'egw_wiki_links';
@@ -423,7 +418,7 @@ class wiki_so	// DB-Layer
 	/**
 	 * Constructor of the PageStrore class sowiki
 	 *
-	 * @param int $wikid_id which wiki to use, default 0
+	 * @param int $wiki_id which wiki to use, default 0
 	 */
 	function __construct($wiki_id=0)
 	{
@@ -451,7 +446,7 @@ class wiki_so	// DB-Layer
 	/**
 	 * Create a page object / instanciate the soWikiPage class.
 	 * @param string $name name of the page
-	 * @param string/boolean $lang language or false for the users default language-order
+	 * @param string|boolean $lang language or false for the users default language-order
 	 * @return object soWikiPage class of the page
 	*/
 	function &page($name = '',$lang=False)
@@ -463,8 +458,7 @@ class wiki_so	// DB-Layer
 			$lang = $lang ? $lang : @$name['lang'];
 			$name = @$name['name'] ? $name['name'] : @$name['title'];
 		}
-		$name = htmlspecialchars_decode($name);
-		$page = new soWikiPage($this->db,$this->PgTbl,$name,$lang,$this->wiki_id,$this->debug);
+		$page = new soWikiPage($this->db,$this->PgTbl,htmlspecialchars_decode($name),$lang,$this->wiki_id,$this->debug);
 
 		if (!$this->colNames) $this->colNames = $page->column2names();
 
@@ -516,9 +510,10 @@ class wiki_so	// DB-Layer
 		}
 
 		// Use so_sql's search builder for consistancy & extra features, like AND / OR
-		$so_sql = new so_sql('wiki', $this->PgTbl, $this->db);
+		$so_sql = new Api\Storage\Base('wiki', $this->PgTbl, $this->db);
 		//_debug_array(array('text'=>$text,'fields'=>$search_in));
 		if (empty($text)) $text = '%'; // if search string is empty search all
+		$wildcard = $op = $extra_col = null;
 		$search = $so_sql->search2criteria(($text=='%'?'*':str_replace('%','',$text)), $wildcard, $op, $extra_col, $search_in);
 		$sql .= implode(' AND ', $search);
 		$sql .= ')';
@@ -531,14 +526,14 @@ class wiki_so	// DB-Layer
 	/**
 	 * Retrieve a page's edit history.
 	 *
-	 * @param string/array $page name of the page or array with values for keys 'name' and 'lang'
-	 * @param string/boolean $lang language to use or false if given via array in $name, default false
+	 * @param string|array $page name of the page or array with values for keys 'name' and 'lang'
+	 * @param string|boolean $_lang language to use or false if given via array in $name, default false
 	 * @return an array of the different versions
 	 */
-	function history($page,$lang=False)
+	function history($page,$_lang=False)
 	{
 		$name = $this->db->db_addslashes(is_array($page) ? $page['name'] : $page);
-		$lang = $this->db->db_addslashes(is_array($page) && !$lang ? $page['lang'] : $lang);
+		$lang = $this->db->db_addslashes(is_array($page) && !$_lang ? $page['lang'] : $_lang);
 
 		// Don't allow access to hidden content via history
 		$_page = $this->page($name, $lang);
@@ -572,7 +567,7 @@ class wiki_so	// DB-Layer
 	/**
 	 * expunge all pages of a given name wiki_id and language
 	 *
-	 * @param string/array $page page-name or array with values for wiki_id, name and lang keys
+	 * @param string|array $page page-name or array with values for wiki_id, name and lang keys
 	 */
 	function expunge_page($page)
 	{
@@ -587,7 +582,7 @@ class wiki_so	// DB-Layer
 	/**
 	 * Clear all the links cached for a particular page.
 	 *
-	 * @param string/array $page page-name or array with values for wiki_id, name and lang keys
+	 * @param string|array $page page-name or array with values for wiki_id, name and lang keys
 	 */
 	function clear_link($page)
 	{
@@ -603,7 +598,7 @@ class wiki_so	// DB-Layer
 	/**
 	 * Clear all the interwiki definitions for a particular page.
 	 *
-	 * @param string/array $page page-name or array with values for wiki_id, name and lang keys
+	 * @param string|array $page page-name or array with values for wiki_id, name and lang keys
 	 */
 	function clear_interwiki($page)
 	{
@@ -619,7 +614,7 @@ class wiki_so	// DB-Layer
 	/**
 	 * Clear all the sisterwiki definitions for a particular page.
 	 *
-	 * @param string/array $page page-name or array with values for wiki_id, name and lang keys
+	 * @param string|array $page page-name or array with values for wiki_id, name and lang keys
 	 */
 	function clear_sisterwiki($page)
 	{
@@ -635,7 +630,7 @@ class wiki_so	// DB-Layer
 	/**
 	 * Add a link for a given page to the link table.
 	 *
-	 * @param string/array $page page-name or array with values for wiki_id, name and lang keys
+	 * @param string|array $page page-name or array with values for wiki_id, name and lang keys
 	 * @param string $link the link to add
 	 */
 	function new_link($page, $link)
@@ -656,11 +651,11 @@ class wiki_so	// DB-Layer
 		);
 		// $links need to be 2-dimensional as rename, can cause new_link to be called for different pages
 		$page_uid = strtolower($where['wiki_id'].':'.$where['wiki_name'].':'.$where['wiki_lang']);
-		$link = strtolower(trim($link));
+		$llink = strtolower(trim($link));
 
-		$data = array('wiki_count' => ++$links[$page_uid][$link]);
+		$data = array('wiki_count' => ++$links[$page_uid][$llink]);
 		//error_log(__METHOD__.__LINE__.' link 2 insert:'.trim($link));
-		if ($this->debug) echo "<p>sowiki::new_link('$where[wiki_id]:$where[wiki_name]:$where[wiki_lang]','$link') = $data[wiki_count]</p>";
+		if ($this->debug) echo "<p>sowiki::new_link('$where[wiki_id]:$where[wiki_name]:$where[wiki_lang]','$llink') = $data[wiki_count]</p>";
 		if ($data['wiki_count'] == 1)
 		{
 			$this->db->insert($this->LkTbl,array_merge($data,$where),False,__LINE__,__FILE__);
@@ -698,7 +693,7 @@ class wiki_so	// DB-Layer
 	/**
 	 * Add an interwiki definition for a particular page.
 	 *
-	 * @param string/array $page page-name or array with values for name, lang and evtl. wiki_id (this->wiki_id is used if not)
+	 * @param string|array $page page-name or array with values for name, lang and evtl. wiki_id (this->wiki_id is used if not)
 	 * @param string $prefix Prefix of the new interwiki
 	 * @param string $url URL of the new interwiki
 	 */
@@ -717,7 +712,7 @@ class wiki_so	// DB-Layer
 	/**
 	 * Add an sisterwiki definition for a particular page.
 	 *
-	 * @param string/array $page page-name or array with values for name, lang and evtl. wiki_id (this->wiki_id is used if not)
+	 * @param string|array $page page-name or array with values for name, lang and evtl. wiki_id (this->wiki_id is used if not)
 	 * @param string $prefix Prefix of the new interwiki
 	 * @param string $url URL of the new interwiki
 	 */
@@ -736,7 +731,7 @@ class wiki_so	// DB-Layer
 	/**
 	 * Find all twins of a page at sisterwiki sites.
 	 *
-	 * @param string/array $page page-name or array with values for name
+	 * @param string|array $page page-name or array with values for name
 	 * @return array list of array(site,page)
 	 */
 	function twinpages($page)
@@ -778,12 +773,12 @@ class wiki_so	// DB-Layer
 	 */
 	function allpages()
 	{
-		$qid = $this->db->query("SELECT t1.wiki_time,t1.wiki_name,t1.wiki_lang,t1.wiki_hostname,t1.wiki_username,t1.wiki_title,".$this->length_sql('t1.').
-														" AS wiki_length,t1.wiki_comment,t1.wiki_version,MAX(t2.wiki_version)" .
-														" FROM $this->PgTbl AS t1, (select wiki_id,wiki_lang,wiki_name, max(wiki_version) as wiki_version  from $this->PgTbl GROUP BY wiki_id, wiki_lang, wiki_name) AS t2" .
-														" WHERE t1.wiki_name = t2.wiki_name AND t1.wiki_lang=t2.wiki_lang AND t1.wiki_id=t2.wiki_id AND t1.wiki_id=".(int)$this->wiki_id.
-														" GROUP BY t1.wiki_name,t1.wiki_lang,t1.wiki_version,t1.wiki_time,t1.wiki_hostname,t1.wiki_username,t1.wiki_body,t1.wiki_comment,t1.wiki_title" .
-														" HAVING t1.wiki_version = MAX(t2.wiki_version)",__LINE__,__FILE__);
+		$this->db->query("SELECT t1.wiki_time,t1.wiki_name,t1.wiki_lang,t1.wiki_hostname,t1.wiki_username,t1.wiki_title,".$this->length_sql('t1.').
+			" AS wiki_length,t1.wiki_comment,t1.wiki_version,MAX(t2.wiki_version)" .
+			" FROM $this->PgTbl AS t1, (select wiki_id,wiki_lang,wiki_name, max(wiki_version) as wiki_version  from $this->PgTbl GROUP BY wiki_id, wiki_lang, wiki_name) AS t2" .
+			" WHERE t1.wiki_name = t2.wiki_name AND t1.wiki_lang=t2.wiki_lang AND t1.wiki_id=t2.wiki_id AND t1.wiki_id=".(int)$this->wiki_id.
+			" GROUP BY t1.wiki_name,t1.wiki_lang,t1.wiki_version,t1.wiki_time,t1.wiki_hostname,t1.wiki_username,t1.wiki_body,t1.wiki_comment,t1.wiki_title" .
+			" HAVING t1.wiki_version = MAX(t2.wiki_version)",__LINE__,__FILE__);
 
 		return $this->_return_pages('allpages()');
 	}
@@ -842,11 +837,11 @@ class wiki_so	// DB-Layer
 	function emptypages()
 	{
 		$this->db->query("SELECT t1.wiki_time,t1.wiki_name,t1.wiki_lang,t1.wiki_hostname,t1.wiki_username,0,t1.wiki_comment,t1.wiki_version,MAX(t2.wiki_version),t1.wiki_title " .
-										 " FROM $this->PgTbl AS t1, (select wiki_id,wiki_lang,wiki_name, max(wiki_version) as wiki_version  from $this->PgTbl GROUP BY wiki_id, wiki_lang, wiki_name) AS t2" .
-										 " WHERE t1.wiki_name=t2.wiki_name AND t1.wiki_lang=t2.wiki_lang AND t1.wiki_id=t2.wiki_id AND t1.wiki_id=".(int)$this->wiki_id.
-										 "  AND t1.wiki_body IS NULL ".
-										 " GROUP BY t1.wiki_name,t1.wiki_lang,t1.wiki_version,t1.wiki_time,t1.wiki_hostname,t1.wiki_username,t1.wiki_comment".
-										 " HAVING t1.wiki_version = MAX(t2.wiki_version) ",__LINE__,__FILE__);
+			" FROM $this->PgTbl AS t1, (select wiki_id,wiki_lang,wiki_name, max(wiki_version) as wiki_version  from $this->PgTbl GROUP BY wiki_id, wiki_lang, wiki_name) AS t2" .
+			" WHERE t1.wiki_name=t2.wiki_name AND t1.wiki_lang=t2.wiki_lang AND t1.wiki_id=t2.wiki_id AND t1.wiki_id=".(int)$this->wiki_id.
+			"  AND t1.wiki_body IS NULL ".
+			" GROUP BY t1.wiki_name,t1.wiki_lang,t1.wiki_version,t1.wiki_time,t1.wiki_hostname,t1.wiki_username,t1.wiki_comment".
+			" HAVING t1.wiki_version = MAX(t2.wiki_version) ",__LINE__,__FILE__);
 
 		return $this->_return_pages('emptypages()');
 	}
@@ -1029,4 +1024,3 @@ class wiki_so	// DB-Layer
 		$this->db->delete($this->RtTbl,array('wiki_rate_ip' => $address),__LINE__,__FILE__);
 	}
 }
-?>

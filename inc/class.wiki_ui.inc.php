@@ -1,16 +1,17 @@
 <?php
 /**
- * eGroupware Wiki - User interface
+ * EGroupware Wiki - User interface
  *
  * @link http://www.egroupware.org
  * @package wiki
  * @author Ralf Becker <RalfBecker-AT-outdoor-training.de>
- * @copyright (C) 2004-10 by RalfBecker-AT-outdoor-training.de
+ * @copyright (C) 2004-17 by RalfBecker-AT-outdoor-training.de
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
  * @version $Id$
  */
 
 use EGroupware\Api;
+use EGroupware\Api\Framework;
 
 class wiki_ui extends wiki_bo
 {
@@ -24,7 +25,7 @@ class wiki_ui extends wiki_bo
 	/**
 	 * Constructor
 	 *
-	 * @param int $wiki_id=null wiki_id to pass on to parent if specified, otherwise $_GET['wiki_id'] is used
+	 * @param int $wiki_id =null wiki_id to pass on to parent if specified, otherwise $_GET['wiki_id'] is used
 	 */
 	function __construct($wiki_id=null)
 	{
@@ -44,7 +45,7 @@ class wiki_ui extends wiki_bo
 				break;
 			case 'auto':
 			default:
-				$this->auto_convert = html::htmlarea_availible();
+				$this->auto_convert = Api\Html::htmlarea_availible();
 		}
 		if (get_magic_quotes_gpc())
 		{
@@ -55,7 +56,7 @@ class wiki_ui extends wiki_bo
 		}
 
 		// load app.js to automatic add target _blank to external links
-		Api\Framework::includeJS('/wiki/js/app.js');
+		Framework::includeJS('/wiki/js/app.js');
 	}
 
 	function uiwiki()
@@ -133,7 +134,7 @@ class wiki_ui extends wiki_bo
 			{
 				case 'delete':
 					//error_log(__METHOD__.array2string($content));
-					if (($content['is_html']&&trim(translation::convertHTMLToText($content['text']))=='')||trim($content['text'])=='' || (trim($content['text'])=='##EXPUNGE##' && trim($content['summary'])=='##EXPUNGE##'))
+					if (($content['is_html']&&trim(Api\Mail\Html::convertHTMLToText($content['text']))=='')||trim($content['text'])=='' || (trim($content['text'])=='##EXPUNGE##' && trim($content['summary'])=='##EXPUNGE##'))
 					{
 						$content['text']='##EXPUNGE##';
 						$content['comment'] = '##EXPUNGE##';
@@ -198,14 +199,14 @@ class wiki_ui extends wiki_bo
 					if(count(array_intersect($pg->memberships, $pref)) == 0 && count(array_intersect(array_keys($acl_values), $pref)) == 0)
 					{
 						$pref[] = $GLOBALS['egw_info']['user']['account_primary_group'];
-					};
+					}
 					$content[$attr] = $pref;
 				}
 			}
 		}
 		$this->tpl->read('wiki.edit');
 
-		if ($content['is_html'] || $this->AutoconvertPages == 'never' || !html::htmlarea_availible())
+		if ($content['is_html'] || $this->AutoconvertPages == 'never' || !Api\Html::htmlarea_availible())
 		{
 			$this->tpl->disable_cells('action[convert]');
 			$content['upload_dir'] = $GLOBALS['egw_info']['user']['preferences']['wiki']['upload_dir'];
@@ -213,7 +214,7 @@ class wiki_ui extends wiki_bo
 		if ($content['is_html'] || $this->AutoconvertPages != 'never')
 		{
 			// tell framework CK Editor needs eval and inline javascript AND we cant switch via Ajax once page is loaded :(
-			egw_framework::csp_script_src_attrs(array('unsafe-eval', 'unsafe-inline'));
+			Api\Header\ContentSecurityPolicy::add('script-src', array('unsafe-eval', 'unsafe-inline'));
 		}
 		$GLOBALS['egw_info']['flags']['app_header'] = $GLOBALS['egw_info']['apps']['wiki']['title'] . ' - ' .
 			lang('edit') . ' ' . $content['name'] .
@@ -221,7 +222,7 @@ class wiki_ui extends wiki_bo
 				':' . $content['lang'] : '').
 			($content['name'] != $content['title'] ? ' - ' . $content['title'] : '');
 		$this->tpl->exec('wiki.wiki_ui.edit',$content,array(
-			'lang'     => array('' => lang('not set')) + $GLOBALS['egw']->translation->get_installed_langs(),
+			'lang'     => array('' => lang('not set')) + Api\Translation::get_installed_langs(),
 			'readable' => $acl_values,
 			'writable' => $acl_values,
 		),null,array(
@@ -247,7 +248,7 @@ class wiki_ui extends wiki_bo
 
 		if ($page->read() === false)
 		{
-			$html = '<p><b>'.lang("Page '%1' not found !!!",'<i>'.html::htmlspecialchars($_GET['page'].
+			$html = '<p><b>'.lang("Page '%1' not found !!!",'<i>'.Api\Html::htmlspecialchars($_GET['page'].
 				($_GET['lang']?':'.$_GET['lang']:'')).'</i>')."</b></p>\n";
 			$page = false;
 		}
@@ -268,14 +269,14 @@ class wiki_ui extends wiki_bo
 	/**
 	 * Show the page-header for the manual
 	 *
-	 * @param object/boolean $page sowikipage object or false
+	 * @param object|boolean $page sowikipage object or false
  	 * @param string $title title of the search
 	 */
 	function header($page=false,$title='')
 	{
 		// anonymous sessions have no navbar !!!
 		$GLOBALS['egw_info']['flags']['nonavbar'] = $this->config['allow_anonymous'] != 'Navbar' && $this->anonymous;
-		$GLOBALS['egw']->common->egw_header();
+		echo $GLOBALS['egw']->framework->header();
 
 		if ($page)
 		{
@@ -289,8 +290,8 @@ class wiki_ui extends wiki_bo
 		$html .= '<form action="'.$GLOBALS['egw']->link('/index.php',array('menuaction'=>'wiki.wiki_ui.search')).'" method="POST" class="noPrint">'.
 			'<a href="'.$this->viewURL($this->config['wikihome']).'">'.$this->link_title($this->config['wikihome']).'</a> | '.
 			'<a href="'.$this->viewUrl('RecentChanges').'">'.lang('Recent Changes').'</a> | '.
-			'<input name="search" value="'.html::htmlspecialchars($_REQUEST['search']).'" /> '.
-			'<input type="submit" name="go" value="'.html::htmlspecialchars(lang('Search')).'" /></form>'."\n";
+			'<input name="search" value="'.Api\Html::htmlspecialchars($_REQUEST['search']).'" /> '.
+			'<input type="submit" name="go" value="'.Api\Html::htmlspecialchars(lang('Search')).'" /></form>'."\n";
 		$html .= "<hr />\n";
 
 		return $html;
@@ -299,7 +300,7 @@ class wiki_ui extends wiki_bo
 	/**
 	 * Show the page-footer for the manual
 	 *
-	 * @param object/boolean $page sowikipage object or false
+	 * @param object|boolean $page sowikipage object or false
  	 */
 	function footer($page=false)
 	{
@@ -337,9 +338,9 @@ class wiki_ui extends wiki_bo
 				$nothing_found = false;
 				$html .= "<ul>\n";
 			}
-			$item = '<li><a href="'.htmlspecialchars($this->viewURL($page['name'],$page['lang'])).'"><b>'.html::htmlspecialchars($page['title']).'</b></a>'.
-				($page['lang'] != $this->lang ? ' <i>'.html::htmlspecialchars($GLOBALS['egw']->translation->lang2language($page['lang'])).'</i>' : '').'<br />'.
-				html::htmlspecialchars($this->summary($page))."</li>\n";
+			$item = '<li><a href="'.htmlspecialchars($this->viewURL($page['name'],$page['lang'])).'"><b>'.Api\Html::htmlspecialchars($page['title']).'</b></a>'.
+				($page['lang'] != $this->lang ? ' <i>'.Api\Html::htmlspecialchars(Api\Translation::lang2language($page['lang'])).'</i>' : '').'<br />'.
+				Api\Html::htmlspecialchars($this->summary($page))."</li>\n";
 
 			if ($page['lang'] != $this->lang)
 			{

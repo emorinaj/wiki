@@ -1,16 +1,17 @@
 <?php
 /**
- * eGroupware Wiki - Hooks
+ * EGroupware Wiki - Hooks
  *
  * @link http://www.egroupware.org
  * @package wiki
  * @author Ralf Becker <RalfBecker-AT-outdoor-training.de>
- * @copyright (C) 2004-16 by RalfBecker-AT-outdoor-training.de
+ * @copyright (C) 2004-17 by RalfBecker-AT-outdoor-training.de
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
  * @version $Id$
  */
 
 use EGroupware\Api;
+use EGroupware\Api\Egw;
 
 /**
  * Static hooks for wiki
@@ -132,11 +133,13 @@ $$Content$$'
 	 */
 	public static function admin($hook_data)
 	{
+		unset($hook_data);	// not used, but required by function signature
+
 		$title = $appname = 'wiki';
 		$file = Array(
-			'Site Configuration' => egw::link('/index.php','menuaction=admin.admin_config.index&appname=' . $appname.'&ajax=true'),
+			'Site Configuration' => Egw::link('/index.php','menuaction=admin.admin_config.index&appname=' . $appname.'&ajax=true'),
 		//	'Lock / Unlock Pages' => $GLOBALS['egw']->link('/wiki/index.php','action=admin&locking=1'),
-			'Block / Unblock hosts' => egw::link('/wiki/index.php','action=admin&blocking=1'),
+			'Block / Unblock hosts' => Egw::link('/wiki/index.php','action=admin&blocking=1'),
 			array(
 				'id' => 'apps/wiki/rebuild_links',
 				'text' => lang('Rebuild Links'),
@@ -156,6 +159,8 @@ $$Content$$'
 	 */
 	public static function sidebox_menu($hook_data)
 	{
+		unset($hook_data);	// not used, but required by function signature
+
 		$appname = 'wiki';
 		$menu_title = lang('Wiki Menu');
 		$file = Array(
@@ -177,11 +182,13 @@ $$Content$$'
 	/**
 	 * Hook called by link-class to include infolog in the appregistry of the linkage
 	 *
-	 * @param array/string $location location and other parameters (not used)
+	 * @param array|string $location location and other parameters (not used)
 	 * @return array with method-names
 	 */
 	static function search_link($location)
 	{
+		unset($location);	// not used, but required by function signature
+
 		return array(
 			'query'      => 'wiki.wiki_bo.link_query',
 			'title'      => 'wiki.wiki_bo.link_title',
@@ -196,7 +203,7 @@ $$Content$$'
 		$wiki = new wiki_hooks();
 		$message = $wiki->_rebuildlinks();
 
-		egw_json_response::get()->apply('egw.message', array(lang('Done') . "<br />".$message,'success'));
+		Api\Json\Response::get()->apply('egw.message', array(lang('Done') . "<br />".$message,'success'));
 	}
 
 	/**
@@ -232,7 +239,13 @@ $$Content$$'
 
 			if ($bo->debug) $start = microtime(true);
 			// do not resolve makros, as it makes no sense to store the resolved stuff with the link table
-			foreach ($ParseEngine as $k => $method) if ($method=='parse_macros' || $method=='parse_transclude' || $method=='parse_elements') array_splice($ParseEngine,$k,1);
+			foreach ($ParseEngine as $k => $method)
+			{
+				if ($method=='parse_macros' || $method=='parse_transclude' || $method=='parse_elements')
+				{
+					array_splice($ParseEngine,$k,1);
+				}
+			}
 			//error_log(__METHOD__.__LINE__.' Method:'.array2string($ParseEngine));
 			parseText($p['text'], $ParseEngine, $ParseObject);
 			if ($bo->debug)
@@ -255,8 +268,8 @@ $$Content$$'
 				error_log(__METHOD__.__LINE__.'['.$j.']' ." Action loop and link took ->$time seconds");
 
 				$ennd = microtime(true);
-				$time= $ennd - $starrt;
-				error_log(__METHOD__.__LINE__.' ['.$i.']' ." Action for ".$p['name']." ".$p['title']." ( ".$p['lang']." ) took ->$time seconds");
+				$atime= $ennd - $starrt;
+				error_log(__METHOD__.__LINE__.' ['.$i.']' ." Action for ".$p['name']." ".$p['title']." ( ".$p['lang']." ) took ->$atime seconds");
 			}
 
 			//if ($i >100) break;
