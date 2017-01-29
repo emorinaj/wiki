@@ -33,8 +33,6 @@ class wiki_ui extends wiki_bo
 
 		$this->anonymous = $this->config['allow_anonymous'] && $this->config['anonymous_username'] == $GLOBALS['egw_info']['user']['account_lid'];
 
-		$this->tpl = new etemplate();
-
 		// should pages with wiki-syntax be converted to html automaticaly
 		switch($this->AutoconvertPages)
 		{
@@ -80,7 +78,7 @@ class wiki_ui extends wiki_bo
 		list($action) = @each($content['action']);
 		if (empty($content['name']))
 		{
-			$this->tpl->location('/wiki/');
+			Api\Egw::redirect_link('/wiki/');
 		}
 		$pg = $this->page($content['name'],$content['lang']);
 		if ($content['version'] && $action != 'load')
@@ -94,7 +92,7 @@ class wiki_ui extends wiki_bo
 		}
 		elseif (!$pg->acl_check(True))	// no read-rights
 		{
-			$this->tpl->location('/wiki/');
+			Api\Egw::redirect_link('/wiki/');
 		}
 		if ($start || $action == 'load')
 		{
@@ -204,11 +202,11 @@ class wiki_ui extends wiki_bo
 				}
 			}
 		}
-		$this->tpl->read('wiki.edit');
+		$tpl = new Api\Etemplate('wiki.edit');
 
 		if ($content['is_html'] || $this->AutoconvertPages == 'never' || !Api\Html::htmlarea_availible())
 		{
-			$this->tpl->disable_cells('action[convert]');
+			$tpl->disableElement('action[convert]');
 			$content['upload_dir'] = $GLOBALS['egw_info']['user']['preferences']['wiki']['upload_dir'];
 		}
 		if ($content['is_html'] || $this->AutoconvertPages != 'never')
@@ -221,7 +219,7 @@ class wiki_ui extends wiki_bo
 			($content['lang'] && $content['lang'] != $GLOBALS['egw_info']['user']['preferences']['common']['lang'] ?
 				':' . $content['lang'] : '').
 			($content['name'] != $content['title'] ? ' - ' . $content['title'] : '');
-		$this->tpl->exec('wiki.wiki_ui.edit',$content,array(
+		$tpl->exec('wiki.wiki_ui.edit',$content,array(
 			'lang'     => array('' => lang('not set')) + Api\Translation::get_installed_langs(),
 			'readable' => $acl_values,
 			'writable' => $acl_values,
@@ -254,7 +252,7 @@ class wiki_ui extends wiki_bo
 		}
 		if ($page && !$page->acl_check(True))	// no read-rights
 		{
-			$this->tpl->location('/wiki/');
+			Api\Egw::redirect_link('/wiki/');
 		}
 		$html = $this->header($page).$html;
 		if ($page) $html .= $this->get($page,'',$this->wiki_id);
