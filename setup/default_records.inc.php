@@ -1,26 +1,25 @@
 <?php
-	/**************************************************************************\
-	* eGroupWare - Setup                                                       *
-	* http://www.eGroupWare.org                                                *
-	* --------------------------------------------                             *
-	*  This program is free software; you can redistribute it and/or modify it *
-	*  under the terms of the GNU General Public License as published by the   *
-	*  Free Software Foundation; either version 2 of the License, or (at your  *
-	*  option) any later version.                                              *
-	\**************************************************************************/
+/**
+ * EGroupware - Wiki
+ *
+ * @link http://www.egroupware.org
+ * @author Ralf Becker <RalfBecker-AT-outdoor-training.de>
+ * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
+ * @package wiki
+ * @subpackage setup
+ * @version $Id$
+ */
 
-	/* $Id$ */
+$time = time();
+$oProc->query("DELETE FROM egw_wiki_pages");
+foreach(array(
+	'RecentChanges' => '[[! *]]',
+	'eGroupWare' => "Welcome to '''Wiki''' - the EGroupware Version of '''WikkiTikkiTavi'''. Wikis are a revolutionary new form of collaboration and online community.
 
-	$time = time();
-	$oProc->query("DELETE FROM egw_wiki_pages");
-	foreach(array(
-		'RecentChanges' => '[[! *]]',
-		'eGroupWare' => "Welcome to '''Wiki''' - the eGroupWare Version of '''WikkiTikkiTavi'''. Wikis are a revolutionary new form of collaboration and online community.
-
-'''eGroupWare''' is the groupware suite you are useing right now. For further information see http://www.eGroupWare.org",
+'''eGroupWare''' is the groupware suite you are useing right now. For further information see http://www.EGroupware.org",
 		'WikkiTikkiTavi' => "= WikkiTikkiTavi =
 
-WikkiTikkiTavi is the original version of this documentation system. Their [http://tavi.sourceforge.net documentation] is usable for the eGroupWare '''Wiki''' too.
+WikkiTikkiTavi is the original version of this documentation system. Their [http://tavi.sourceforge.net documentation] is usable for the EGroupware '''Wiki''' too.
 
 '''Learn about Wiki formatting:'''
 ----
@@ -42,8 +41,8 @@ If you like, enclose it in brackets to create a numbered reference and avoid clu
 
 Or you can have a description instead of a numbered reference; {{```[http://www.php.net/manual/en/ PHP Manual]```}} becomes [http://www.php.net/manual/en/ PHP Manual]
 ----
-You can put a picture in a page by typing the URL to the picture (it must end in gif, jpg, or png).  For example, {{```http://www.egroupware.org/egroupware/phpgwapi/templates/default/images/logo.png```}} becomes
-http://www.egroupware.org/egroupware/phpgwapi/templates/default/images/logo.png
+You can put a picture in a page by typing the URL to the picture (it must end in gif, jpg, or png).  For example, {{```https://community.egroupware.org/egroupware/api/templates/default/images/logo.png```}} becomes
+https://community.egroupware.org/egroupware/api/templates/default/images/logo.png
 ----
 There are 2 possibilities for '''code formatting''':
 {{'''{{\$is_admin = \$GLOBALS['egw_info']['user']['apps']['admin'];}}'''}}
@@ -217,24 +216,24 @@ Displays all pages that are linked to but do not yet exist
 Include the text of an other wikipage:
 [[Transclude eGroupWare]]
 ",
-	) as $name => $body)
-	{
-		$oProc->insert('egw_wiki_pages',array(
-			'wiki_id'        => 0,
-			'wiki_name'      => $name,
-			'wiki_lang'      => 'en',
-			'wiki_version'   => 1,
-			'wiki_time'      => $time,
-			'wiki_supercede' => $time,
-			'wiki_readable'  => ',_0,',
-			'wiki_writable'  => ',_0,',
-			'wiki_username'  => 'setup',
-			'wiki_hostname'  => 'localhost',
-			'wiki_title'     => $name,
-			'wiki_body'      => $body,
-			'wiki_comment'   => 'added by setup',
-		),false,__LINE__,__FILE__,'wiki');
-	}
+) as $name => $body)
+{
+	$oProc->insert('egw_wiki_pages',array(
+		'wiki_id'        => 0,
+		'wiki_name'      => $name,
+		'wiki_lang'      => 'en',
+		'wiki_version'   => 1,
+		'wiki_time'      => $time,
+		'wiki_supercede' => $time,
+		'wiki_readable'  => ',_0,',
+		'wiki_writable'  => ',_0,',
+		'wiki_username'  => 'setup',
+		'wiki_hostname'  => 'localhost',
+		'wiki_title'     => $name,
+		'wiki_body'      => $body,
+		'wiki_comment'   => 'added by setup',
+	),false,__LINE__,__FILE__,'wiki');
+}
 
 // give Default group rights for wiki
 $defaultgroup = $GLOBALS['egw_setup']->add_account('Default','Default','Group',False,False);

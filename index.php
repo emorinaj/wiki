@@ -1,37 +1,35 @@
 <?php
-/**************************************************************************\
-* eGroupWare Wiki - UserInterface                                       *
-* http://www.egroupware.org                                                *
-* -------------------------------------------------                        *
-* Copyright (C) 2004 RalfBecker@outdoor-training.de                        *
-* --------------------------------------------                             *
-*  This program is free software; you can redistribute it and/or modify it *
-*  under the terms of the GNU General Public License as published by the   *
-*  Free Software Foundation; either version 2 of the License, or (at your  *
-*  option) any later version.                                              *
-\**************************************************************************/
+/**
+ * EGroupware Wiki - UserInterface
+ *
+ * @link http://www.egroupware.org
+ * @package wiki
+ * @author Ralf Becker <RalfBecker-AT-outdoor-training.de>
+ * @copyright (C) 2004-17 by RalfBecker-AT-outdoor-training.de
+ * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
+ * @version $Id$
+ */
+
+use EGroupware\Api;
 
 /* $Id$ */
 if (isset($_GET['action']))	// calling the old code
 {
 	include('lib/main.php');
-	exit;	
+	exit;
 }
 else
 {
 	/**
 	 * Check if we allow anon access and with which creditials
-	 * 
+	 *
 	 * @param array &$anon_account anon account_info with keys 'login', 'passwd' and optional 'passwd_type'
 	 * @return boolean true if we allow anon access, false otherwise
 	 */
 	function wiki_check_anon_access(&$anon_account)
 	{
-		$c =& CreateObject('phpgwapi.config','wiki');
-		$c->read_repository();
-		$config =& $c->config_data;
-		unset($c);
-	
+		$config = Api\Config::read('wiki');
+
 		if ($config['allow_anonymous'] && $config['anonymous_username'])
 		{
 			$anon_account = array(
@@ -55,7 +53,6 @@ $GLOBALS['egw_info']['flags'] = array(
 	'autocreate_session_callback' => 'wiki_check_anon_access',
 );
 include('../header.inc.php');
-auth::check_password_age('wiki','index');
 $goto = 'wiki.wiki_ui.view';
 if (!empty($_REQUEST['menuaction']))
 {
@@ -76,4 +73,4 @@ else
 {
 	$GLOBALS['wiki_ui']->maintain();
 }
-common::egw_footer();
+echo $GLOBALS['egw']->framework->footer();

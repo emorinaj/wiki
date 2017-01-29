@@ -1,15 +1,16 @@
 <?php
-/**************************************************************************\
-* eGroupWare Wiki - SiteMgr module                                         *
-* http://www.egroupware.org                                                *
-* -------------------------------------------------                        *
-* Copyright (c) 2004-6 by RalfBecker@outdoor-training.de                   *
-* --------------------------------------------                             *
-*  This program is free software; you can redistribute it and/or modify it *
-*  under the terms of the GNU General Public License as published by the   *
-*  Free Software Foundation; either version 2 of the License, or (at your  *
-*  option) any later version.                                              *
-\**************************************************************************/
+/**
+ * EGroupware Wiki - SiteMgr module
+ *
+ * @link http://www.egroupware.org
+ * @package wiki
+ * @author Ralf Becker <RalfBecker-AT-outdoor-training.de>
+ * @copyright (C) 2004-17 by RalfBecker-AT-outdoor-training.de
+ * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
+ * @version $Id$
+ */
+
+use EGroupware\Api;
 
 /* $Id$ */
 
@@ -38,6 +39,8 @@ class sitemgr_wiki extends wiki_ui
 	 */
 	function viewURL($page, $lang='', $version='', $full = '')
 	{
+		unset($version, $full);	// not used, but requires by function signature
+
 		$url = $_SERVER['PHP_SELF'].'?';
 		foreach($_GET as $name => $val)
 		{
@@ -63,37 +66,38 @@ class sitemgr_wiki extends wiki_ui
 			}
 		}
 		$url .= $this->wikipage_param.'='.urlencode(is_array($page) ? $page['name'] : $page);
-		
+
 		// the page-parameter has to be the last one, as the old wiki code only calls it once with empty page and appends the pages later
 		return $url;
 	}
-	
+
 	/**
 	 * reimplemented to disallow editing
 	 */
 	function editURL($page, $lang='',$version = '')
 	{
+		unset($page, $lang, $version);	// not used, but required by function signature
+
 		return False;
 	}
-	
+
 	/**
 	 * Show the page-header for the sitemgr module
 	 *
-	 * @param object/boolean $page sowikipage object or false
+	 * @param object|boolean $page sowikipage object or false
 	 * @param string $title title of the search
 	 */
 	function header($page=false,$title='')
 	{
-		$html = '<table class="wiki-title"><tr>';
 		if ($page && ($this->arguments['title'] == 2 || $this->arguments['title'] == 1 && $page->name == $this->arguments['startpage']))
 		{
-			if (isset($page->title)) $title = html::htmlspecialchars($page->title);
+			if (isset($page->title)) $title = Api\Html::htmlspecialchars($page->title);
 		}
 		if ($this->arguments['search'])
 		{
 			$search = '<form class="wiki-search" action="'.htmlspecialchars($this->viewURL($this->search_tag)).'" method="POST">'.
-				'<input name="search" value="'.html::htmlspecialchars($_REQUEST['search']).'" />&nbsp;'.
-				'<input type="submit" value="'.html::htmlspecialchars(lang('Search')).'" /></form>'."\n";
+				'<input name="search" value="'.Api\Html::htmlspecialchars($_REQUEST['search']).'" />&nbsp;'.
+				'<input type="submit" value="'.Api\Html::htmlspecialchars(lang('Search')).'" /></form>'."\n";
 		}
 		if ($title && $search || $search && $this->arguments['title'] == 1)
 		{
@@ -110,14 +114,16 @@ class sitemgr_wiki extends wiki_ui
 		}
 		return '';
 	}
-	
+
 	/**
 	 * Show the page-footer for the sitemgr module
 	 *
-	 * @param object/boolean $page sowikipage object or false
+	 * @param object|boolean $page sowikipage object or false
 	 */
 	function footer($page=false)
 	{
+		unset($page);	// not used, but required by function signature
+
 		return '';
 	}
 
@@ -146,9 +152,9 @@ class sitemgr_wiki extends wiki_ui
 		}
 		$page =& $this->page($wikipage,$lang);
 		if ($page->read() === False) $page = false;
-		
+
 		$html = $this->header($page);
-		
+
 		if (!$page) $html .= '<p><b>'.lang("Page '%1' not found !!!",'<i>'.$wikipage.($lang ? ':'.$lang : '').'</i>')."</b></p>\n";
 
 		$html .= '<div class="wiki-content">' . $this->get($page) . "</div>\n";
@@ -165,7 +171,7 @@ class module_wiki extends Module
 {
 	function module_wiki()
 	{
-		$GLOBALS['egw']->translation->add_app('wiki');
+		Api\Translation::add_app('wiki');
 
 		$this->arguments = array(
 			'startpage' => array(
@@ -180,7 +186,7 @@ class module_wiki extends Module
 					1 => lang('only on the first page'),
 					2 => lang('on all pages'),
 				)
-			),	
+			),
 			'search' => array(
 				'type' => 'checkbox',
 				'label' => lang('Show a search'),
@@ -193,6 +199,8 @@ class module_wiki extends Module
 
 	function get_content(&$arguments,$properties)
 	{
+		unset($properties);	// not used, but required by function signature
+
 		if (!@$GLOBALS['egw_info']['user']['apps']['wiki'])
 		{
 			return lang('You have no rights to view wiki content !!!');

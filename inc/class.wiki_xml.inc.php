@@ -1,14 +1,17 @@
 <?php
 /**
- * eGroupware Wiki - XML Import & Export
+ * EGroupware Wiki - XML Import & Export
  *
  * @link http://www.egroupware.org
  * @package wiki
  * @author Ralf Becker <RalfBecker-AT-outdoor-training.de>
- * @copyright (C) 2004-16 by RalfBecker-AT-outdoor-training.de
+ * @copyright (C) 2004-17 by RalfBecker-AT-outdoor-training.de
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
  * @version $Id$
  */
+
+use EGroupware\Api;
+use EGroupware\Api\Framework;
 
 include_once(EGW_INCLUDE_ROOT.'/etemplate/inc/class.xmltool.inc.php');
 
@@ -66,7 +69,7 @@ class wiki_xml extends wiki_bo
 			}
 
 			$xml_page = new xmlnode('page');
-			foreach(translation::convert($page, translation::charset(), 'utf-8') as $attr => $val)
+			foreach(Api\Translation::convert($page, Api\Translation::charset(), 'utf-8') as $attr => $val)
 			{
 				if ($attr != 'text')
 				{
@@ -99,7 +102,7 @@ class wiki_xml extends wiki_bo
 		{
 			//echo "<pre>\n" . htmlentities($xml) . "\n</pre>\n";
 			echo $xml;
-			common::egw_exit();
+			exit();
 		}
 		return $xml;
 	}
@@ -109,7 +112,7 @@ class wiki_xml extends wiki_bo
 		if (substr($url,0,4) == 'http')
 		{
 			// use proxy-config from admin >> configuration
-			$xmldata = file_get_contents($url, 0, egw_framework::proxy_context());
+			$xmldata = file_get_contents($url, 0, Framework::proxy_context());
 		}
 		else
 		{
@@ -148,7 +151,7 @@ class wiki_xml extends wiki_bo
 					// fall through
 				case 'cdata':
 					$wiki_page['text'] = trim($val['value']);
-					$wiki_page = translation::convert($wiki_page,'utf-8');
+					$wiki_page = Api\Translation::convert($wiki_page,'utf-8');
 					if ($this->write($wiki_page,False))
 					{
 						if ($debug_messages)

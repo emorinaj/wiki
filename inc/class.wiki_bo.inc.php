@@ -1,14 +1,16 @@
 <?php
 /**
- * eGroupware Wiki - Business Object
+ * EGroupware Wiki - Business Object
  *
  * @link http://www.egroupware.org
  * @package wiki
  * @author Ralf Becker <RalfBecker-AT-outdoor-training.de>
- * @copyright (C) 2004-8 by RalfBecker-AT-outdoor-training.de
+ * @copyright (C) 2004-17 by RalfBecker-AT-outdoor-training.de
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
  * @version $Id$
  */
+
+use EGroupware\Api;
 
 // old global stuff, is still need for now, but hopefully will go away
 global $ParseEngine,$DiffEngine,$DisplayEngine,$ConvertEngine,$SaveMacroEngine,$ViewMacroEngine;
@@ -18,7 +20,7 @@ global $TempDir, $DiffCmd;
 global $RatePeriod, $RateView, $RateSearch, $RateEdit;
 
 require_once(EGW_INCLUDE_ROOT.'/wiki/lib/defaults.php');
-if (is_object($GLOBALS['egw']->translation) && $GLOBALS['egw']->translation->charset() == 'iso-8859-1')	// allow all iso-8859-1 extra-chars
+if (Api\Translation::charset() == 'iso-8859-1')	// allow all iso-8859-1 extra-chars
 {
 	$UpperPtn = "[A-Z\xc0-\xde]";
 	$LowerPtn = "[a-z\xdf-\xff]";
@@ -60,10 +62,7 @@ class wiki_bo extends wiki_so
 			$pagestore = new wiki_so($wiki_id);	// cant use =& as global $pagestore is a reverence!
 		}
 		global $Admin,$HomePage,$InterWikiPrefix,$EnableFreeLinks,$EnableWikiLinks;
-		$c =& CreateObject('phpgwapi.config','wiki');
-		$c->read_repository();
-		$this->config = $c->config_data;
-		unset($c);
+		$this->config = Api\Config::read('wiki');
 
 		$Admin = $this->config['emailadmin'];
 		if (!isset($this->config['wikihome'])) $this->config['wikihome'] = 'eGroupWare';
@@ -75,7 +74,7 @@ class wiki_bo extends wiki_so
 		$this->ExpireLen = $this->config['ExpireLen'];
 
 		global $Charset,$UserName;
-		$Charset = $GLOBALS['egw']->translation->charset();
+		$Charset = Api\Translation::charset();
 		$UserName = $GLOBALS['egw_info']['user']['account_lid'];
 
 		$this->AutoconvertPages = $this->config['AutoconvertPages'];
@@ -98,15 +97,14 @@ class wiki_bo extends wiki_so
 	 */
 	function summary($page)
 	{
-		$text = $page['text'];
-		// remove pictures
-		$text = preg_replace('/egw:[a-z]+\\/[a-z.-]+ /i','',$text);
-		// replace freelinks with their title
-		$text = preg_replace('/\\(\\([^|]*\\|? ?([^)]+)\\)\\)/','\\1',$text);
-		// remove some formatting and the title itself
-		$text = str_replace(array('= '.$page['title'].' =','=','#','*',"'''","''",'----'),'',$text);
 		// remove html tags
-		$text = strip_tags($text);
+		$text = strip_tags(
+			// remove some formatting and the title itself
+			str_replace(array('= '.$page['title'].' =','=','#','*',"'''","''",'----'),'',
+				// replace freelinks with their title
+				preg_replace('/\\(\\([^|]*\\|? ?([^)]+)\\)\\)/','\\1',
+					// remove pictures
+					preg_replace('/egw:[a-z]+\\/[a-z.-]+ /i','',$page['text']))));
 
 		return substr($text,0,330);
 	}
@@ -187,7 +185,7 @@ class wiki_bo extends wiki_so
 		// Check for notifications that need to be sent
 		// Needs testing
 		//$this->send_notifications($page);
-		
+
 		$GLOBALS['page'] = $page->as_array();	// we need this to track lang for new_link, sister_wiki, ...
 
 		if(!empty($values['category']))		// Editor asked page to be added to a category or categories.
@@ -245,7 +243,7 @@ class wiki_bo extends wiki_so
 		// change all links to old_name with the new link
 		foreach($this->get_links($old_name) as $page => $langs)
 		{
-			foreach($langs as $lang => $link)
+			foreach(array_keys($langs) as $lang)
 			{
 				$to_replace = $this->page($page,$lang);
 				if ($to_replace->read() !== False)
@@ -330,14 +328,14 @@ class wiki_bo extends wiki_so
 		{
 			$lang = '&lang=' . ($lang ? $lang : $page['lang']);
 		}
-		return $HistoryBase . urlencode(is_array($page) ? $page['name'] : $page) . $lang;
-				($full == '' ? '' : '&full=1');
+		return $HistoryBase . urlencode(is_array($page) ? $page['name'] : $page) . $lang.
+			($full == '' ? '' : '&full=1');
 	}
 
 	/**
 	 * Hook called by link-class to include infolog in the appregistry of the linkage
 	 *
-	 * @param array/string $location location and other parameters (not used)
+	 * @param array|string $location location and other parameters (not used)
 	 * @deprecated use wiki_hooks::search_link() moved there, because it get's called at setup time, which fails here!
 	 * @return array with method-names
 	 */
@@ -351,7 +349,7 @@ class wiki_bo extends wiki_so
 	 *
 	 * Is called as hook to participate in the linking
 	 *
-	 * @param string/object $page string with page-name or sowikipage object
+	 * @param string|object $page string with page-name or sowikipage object
 	 * @return string/boolean string with title, null if page not found or false if not view perms
 	 */
 	function link_title( $page )
@@ -401,24 +399,25 @@ class wiki_bo extends wiki_so
 		// Nicer formatting for wiki-text pages
 		if(substr($page->text, 0, 6) != '<html>')
 		{
-			foreach(array($old_page, $page) as $_page) {
-				$text = $_page->text;
-				// remove pictures
-				$text = preg_replace('/egw:[a-z]+\\/[a-z.-]+ /i','',$text);
-				// replace freelinks with their title
-				$text = preg_replace('/\\(\\([^|]*\\|? ?([^)]+)\\)\\)/','\\1',$text);
-				// remove some formatting and the title itself
-				$text = str_replace(array('= '.$page->title.' =','=','#','*',"'''","''",'----'),'',$text);
+			foreach(array($old_page, $page) as $_page)
+			{
 				// remove html tags
-				$text = strip_tags($text);
+				$text = strip_tags(
+					// remove some formatting and the title itself
+					str_replace(array('= '.$page->title.' =','=','#','*',"'''","''",'----'),'',
+						// replace freelinks with their title
+						preg_replace('/\\(\\([^|]*\\|? ?([^)]+)\\)\\)/','\\1',
+							// remove pictures
+							preg_replace('/egw:[a-z]+\\/[a-z.-]+ /i','',$_page->text))));
+
 				$_page->text = nl2br($text);
 			}
 		}
-		
+
 		$save_prefs = $GLOBALS['egw_info']['user'];
 		$values = array(
 			'Title'         =>      $page->title,
-			'Editor'	=>	common::display_fullname('','','',$GLOBALS['egw_info']['user']['account_id']),
+			'Editor'	=>	Api\Accounts::format_username('','','',$GLOBALS['egw_info']['user']['account_id']),
 			'Summary'       =>      $page->comment,
 			'Category'      =>      $page->category,
 			'Content'	=>	$page->text,
@@ -433,10 +432,9 @@ class wiki_bo extends wiki_so
 		}
 
 		// Fall back to whatever wiki can come up with
-		$diff = diff_compute($page->text, $old_page->text);
-		$diff = diff_parse($diff);
+		$diff = diff_parse(diff_compute($page->text, $old_page->text));
 		$values['Diff'] = parseText($diff,$GLOBALS['DiffEngine'],$values['Title']);
-		
+
 		// Need to get a list of people who want the change
 		$user_ids = array();
 		$notification = array();
@@ -480,7 +478,7 @@ class wiki_bo extends wiki_so
 		foreach($id_list as $id)
 		{
 			if($id == $GLOBALS['egw_info']['user']['account_id']) continue;
-			$prefs = new preferences($id);
+			$prefs = new Api\Preferences($id);
 			$data = $prefs->read_repository(false);
 			$regex = true;
 			if($data['wiki']['notification_regex']) {
@@ -490,8 +488,8 @@ class wiki_bo extends wiki_so
 					$regex = $regex && preg_match($test, $page->$field) == 1;
 				}
 			}
-			if(($regex && in_array($id, $user_ids['read'])) || 
-					($data['wiki']['notification_read'] && in_array($id, $user_ids['read'])) || 
+			if(($regex && in_array($id, $user_ids['read'])) ||
+					($data['wiki']['notification_read'] && in_array($id, $user_ids['read'])) ||
 					($data['wiki']['notification_write'] && in_array($id, $user_ids['write']))) {
 				$message = $prefs->parse_notify(nl2br($data['wiki']['notification_message']), $values, true);
 				if(trim($message) != '') {
@@ -513,7 +511,7 @@ class wiki_bo extends wiki_so
 					'page'		=>	$page->name
 				));
 				$n->send();
-				$n = null;
+				unset($n);
 			}
 		}
 
@@ -544,14 +542,14 @@ class wiki_bo extends wiki_so
 		}
 
 		// Make sure there are delimiters
-		foreach($regex as $field => &$pattern)
+		foreach($regex as &$pattern)
 		{
 			if(substr($pattern,0,1) !== substr($pattern, -1) || !in_array(substr($pattern,0,1), array('/','#','~','@')))
 			{
 				$pattern = '/'.$pattern.'/';
 			}
 		}
-		
+
 		return $regex;
 	}
 }
