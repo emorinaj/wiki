@@ -13,9 +13,7 @@
 					<description value="Name"/>
 					<hbox options="0">
 						<textbox id="name" size="60"/>
-						<menulist>
-							<menupopup label="Lang" id="lang" no_lang="1" class="leftpadding5"/>
-						</menulist>
+						<select label="Lang" id="lang" no_lang="1"/>
 						<button statustext="Loads the named page in the given language, all change so far get lost !!!" label="Load" id="action[load]" class="leftpadding5"/>
 						<button statustext="Renames page to the given name and language" label="Rename" id="action[rename]" class="leftpadding5"/>
 					</hbox>
@@ -25,9 +23,9 @@
 					<hbox options="0">
 						<textbox statustext="different languages can have different titles" id="title" size="60"/>
 						<description value="Writable by" class="leftpadding5"/>
-						<listbox width="20%" type="select-account" statustext="who should be able to edit this page" id="writable" no_lang="1" multiple="true" tags="true" options="groups" class="leftpadding5"/>
+						<select-account statustext="who should be able to edit this page" id="writable" onchange="app.wiki.onchange_acl" no_lang="1" multiple="true" tags="true" account_type="groups" width="150px"/>
 						<description value="Readable by" class="leftpadding5"/>
-						<listbox width="20%" type="select-account" statustext="who should be able to read this page" id="readable" no_lang="1"  tags="true" multiple="true" options="groups" class="leftpadding5"/>
+						<select-account statustext="who should be able to read this page" id="readable" onchange="app.wiki.onchange_acl" no_lang="1" multiple="true" tags="true" account_type="groups" width="150px"/>
 					</hbox>
 				</row>
 				<row class="row" disabled="!@is_html">

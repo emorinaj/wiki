@@ -64,5 +64,20 @@ app.classes.wiki = (function(){ "use strict"; return AppJS.extend(
 	{
 		// call parent
 		this._super.apply(this, arguments);
+	},
+
+	/**
+	 * Onchange for readable and writable acl: default back to "Everyone" if non set
+	 *
+	 * @param {DOMNode} _node
+	 * @param {et2_select} _widget
+	 */
+	onchange_acl: function(_node, _widget)
+	{
+		var value = _widget.get_value();
+		if (jQuery.isArray(value) && !value.length)
+		{
+			_widget.set_value('_0');
+		}
 	}
 });}).call(this);
