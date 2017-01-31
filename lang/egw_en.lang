@@ -77,9 +77,7 @@ page content	wiki	en	Page content
 pages i have read access	wiki	en	Pages I have read access
 pages i have write access	wiki	en	Pages I have write access
 pages that match this regular expression	wiki	en	Pages that match this regular expression
-path of the upload directory (has to be writable by the webserver!)	admin	en	Path of the upload directory has to be writable by the web server!
 person who changed the page	wiki	en	Person who changed the page
-picture upload via richtext editor (leave the upload directory empty to disable the upload)	admin	en	Picture upload via rich text editor, leave the upload directory empty to disable the upload
 please contact the %1administrator%2 for assistance.	wiki	en	Please contact the %1Administrator%2 for assistance.
 preview	wiki	en	Preview
 preview of current version	wiki	en	Preview of current version
@@ -104,6 +102,7 @@ this page can not be edited.	wiki	en	This page can not be edited!
 twin pages	wiki	en	Twin pages
 unblock	wiki	en	Unblock
 updates the preview	wiki	en	Updates the preview
+upload directory for pasted or dragged in images in egroupware vfs (filemanager).	wiki	en	Upload directory for pasted or dragged in images in EGroupware VFS (filemanager).
 url of the upload directory	admin	en	URL of the upload directory
 use this module for displaying wiki-pages	wiki	en	Use this module for displaying wiki pages
 users	wiki	en	Users

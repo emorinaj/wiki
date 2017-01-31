@@ -111,16 +111,25 @@ $$Content$$'
 			);
 		}
 */
-		if ($GLOBALS['egw_info']['user']['apps']['filemanager'])
+		if ($GLOBALS['egw_info']['user']['apps']['filemanager'] || !empty(!$hook_data['setup']))
 		{
+			if ($GLOBALS['egw']->accounts->exists('Default') == 2)
+			{
+				$default = '/home/Default';
+			}
+			else
+			{
+				$default = $GLOBALS['egw']->accounts->id2name($GLOBALS['egw_info']['user']['account_primary_group']);
+			}
 			$settings['upload_dir'] = array(
 				'type'  => 'vfs_dir',
 				'label' => 'VFS upload directory',
 				'name'  => 'upload_dir',
 				'size'  => 50,
-				'help'  => 'Start directory for image browser of rich text editor in EGroupware VFS (filemanager).',
+				'help'  => 'Upload directory for pasted or dragged in images in EGroupware VFS (filemanager).',
 				'xmlrpc' => True,
 				'admin'  => False,
+				'default' => $default,
 			);
 		}
 		return $settings;
