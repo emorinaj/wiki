@@ -72,11 +72,7 @@ class soWikiPage
 		$this->name = $name;
 		$this->lang = $lang;
 		$this->wiki_id = (int) $wiki_id;
-		$this->memberships = $GLOBALS['egw']->accounts->membership();
-		foreach($this->memberships as $n => $data)
-		{
-			$this->memberships[$n] = (int) $data['account_id'];
-		}
+		$this->memberships = $GLOBALS['egw']->accounts->memberships($GLOBALS['egw_info']['user']['account_id'], true);
 		$this->user_lang = $GLOBALS['egw_info']['user']['preferences']['common']['lang'];
 		$this->use_langs = array($this->user_lang,'');
 		// english as fallback, should be configurable or a pref
