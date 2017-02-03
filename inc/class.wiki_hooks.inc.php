@@ -35,7 +35,8 @@ class wiki_hooks
 		);
 		foreach($GLOBALS['egw']->accounts->search(array('type' => 'groups')) as $acc)
 		{
-			$options[$acc['account_id']] = Api\Accounts::format_username($acc);
+			$options[$acc['account_id']] = Api\Accounts::format_username(
+				$acc['account_lid'], $acc['account_firstname'], $acc['account_listname'], $acc['account_id']);
 		}
 		$settings = array(
 			'default_read' => array(
