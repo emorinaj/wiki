@@ -29,7 +29,7 @@
 					</hbox>
 				</row>
 				<row class="row" disabled="!@is_html">
-					<htmlarea id="text" options="@rtfEditorFeatures" height="320px" width="100%" expand_toolbar="true" base_href="$cont[upload_dir]" span="all" imageUpload="link_to"/>
+					<htmlarea id="text" options="@rtfEditorFeatures" height="320px" width="100%" expand_toolbar="true" base_href="$cont[upload_dir]" span="all" imageUpload="upload_dir"/>
 				</row>
 				<row disabled="@is_html">
 					<textbox multiline="true" id="text" rows="15" cols="120" span="all"/>
