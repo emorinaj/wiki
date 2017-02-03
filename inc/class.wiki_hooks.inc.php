@@ -111,7 +111,7 @@ $$Content$$'
 			);
 		}
 */
-		if ($GLOBALS['egw_info']['user']['apps']['filemanager'] || !empty(!$hook_data['setup']))
+		if ($GLOBALS['egw_info']['user']['apps']['filemanager'] || !empty($hook_data['setup']))
 		{
 			if ($GLOBALS['egw']->accounts->exists('Default') == 2)
 			{
