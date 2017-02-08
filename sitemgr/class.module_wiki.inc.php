@@ -26,12 +26,12 @@ class sitemgr_wiki extends wiki_ui
 	var $search_tag = '--s-e-a-r-c-h--';	// used to mark queries
 	var $arguments;
 
-	function sitemgr_wiki($arguments)
+	function __construct($arguments)
 	{
 		$this->arguments = $arguments;
 
 		// calling the constructor of the extended class
-		$this->uiwiki();
+		parent::__construct();
 	}
 
 	/**
@@ -169,7 +169,7 @@ class sitemgr_wiki extends wiki_ui
  */
 class module_wiki extends Module
 {
-	function module_wiki()
+	function __construct()
 	{
 		Api\Translation::add_app('wiki');
 
