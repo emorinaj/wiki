@@ -63,7 +63,7 @@ class soWikiPage
 	 *  @param string|boolean $lang requested language or False
 	 *  @param int $wiki_id which wiki to use
 	 */
-	function soWikiPage($db,$PgTbl,$name = '',$lang=False,$wiki_id=0)
+	function __construct($db,$PgTbl,$name = '',$lang=False,$wiki_id=0)
 	{
 		$this->db = $db;		// to have an independent result-pointer
 		$this->db->set_app('wiki');
