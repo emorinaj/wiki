@@ -38,10 +38,6 @@
 					<description value="Summary"/>
 					<textbox statustext="Summary of change" id="summary" size="80"/>
 				</row>
-				<row class="row">
-					<description value="Category"/>
-					<textbox statustext="Add document to category" id="category" size="80"/>
-				</row>
 				<row>
 					<hbox span="2">
 						<button statustext="Save the changes and exit" label="Save" id="action[save]"/>
