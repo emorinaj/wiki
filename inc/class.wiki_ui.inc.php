@@ -326,7 +326,7 @@ class wiki_ui extends wiki_bo
 
 		if (strlen(trim($_REQUEST['search']))==0) $_REQUEST['search'] = '*';
 
-		$html = $this->header(false,lang('Search for').': '.(trim($_REQUEST['search'])=='*'?lang('everything'):html::htmlspecialchars($_REQUEST['search'])));
+		$html = $this->header(false,lang('Search for').': '.(trim($_REQUEST['search'])=='*'?lang('everything'):Api\Html::htmlspecialchars($_REQUEST['search'])));
 
 		$nothing_found = true;
 		foreach($this->find(str_replace(array('*','?'),array('%','_'),$_REQUEST['search'])) as $page)
