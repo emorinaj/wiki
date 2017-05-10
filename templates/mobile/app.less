@@ -1,0 +1,84 @@
+/**
+ *
+ * WiKi - Mobile
+ *
+ * Please do NOT change app.css directly, instead change app.less and compile it!
+ * Pixleegg Template app.css
+ * @link http://www.egroupware.org
+ * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
+ * @author Hadi Nategh <hn@stylite.de>
+ * @package infolog
+ * @version $Id: app.less 55033 2016-02-16 18:49:17Z hnategh $
+ */
+
+
+@import (reference) "../../../pixelegg/less/def_buttons.less";
+@import (reference) "../../../pixelegg/less/def_mobile.less";
+@import (reference) "../../../pixelegg/mobile/app_colors.less";
+
+@media all {
+	form#wiki-edit {
+		padding: 60px 5px 0px 5px;
+	}
+	#wikipage {
+		padding-left: 5px;
+		padding-right: 5px;
+		overflow-y: auto;
+		height:100%;
+		.title {padding-top: 60px;}
+		.searchBox {
+			position: fixed;
+			padding-left: 60px;
+			height: 50px;
+			background-color: @wiki-color;
+			top:0;
+			width:100%;
+			box-shadow: 0px 4px 5px 2px silver;
+			z-index: 1;
+			margin-left: -5px;
+		}
+		.searchBox > input {float:left;height:39px;outline: none;border:none;width:40%;}
+		.searchBox > input[type="submit"] {
+			display: none;
+		}
+		.recentChanges {
+			height: 50px;
+			width: 50px;
+			background-image: url(../../../pixelegg/images/discard.svg);
+			background-repeat: no-repeat;
+			background-position: center;
+			filter: invert(1) brightness(2);
+			display: inline-block;
+		}
+		.wikiHome{
+			height: 50px;
+			width: 50px;
+			background-image: url(../../../pixelegg/images/home.svg);
+			background-repeat: no-repeat;
+			background-position: center;
+			filter: invert(1) brightness(2);
+			display: inline-block;
+		}
+		.editButton {
+			height: 50px;
+			width: 50px;
+			background-image: url(../../../pixelegg/images/edit.svg);
+			background-repeat: no-repeat;
+			background-position: center;
+			filter: invert(1) brightness(2);
+			display: inline-block;
+		}
+		.editButton.disabled {display: none;}
+		.lastModified {
+			position: fixed;
+			bottom: 30px;
+			padding-left: 10%;
+			background: white;
+			width: 100%;
+			height: 20px;
+			left: -5px;
+			border-top: 1px solid #c5c4c4;
+			padding-top: 5px;
+		}
+	}
+}

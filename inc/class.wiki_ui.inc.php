@@ -285,11 +285,25 @@ class wiki_ui extends wiki_bo
 		}
 		$html = '<h1 style="margin:0px;" class="title">'.$title."</h1>\n";
 
-		$html .= '<form action="'.$GLOBALS['egw']->link('/index.php',array('menuaction'=>'wiki.wiki_ui.search')).'" method="POST" class="noPrint">'.
+		if (Api\Header\UserAgent::mobile())
+		{
+			$editable = $page?($page->acl_check()?true:false):false;
+			$html .= '<form action="'.$GLOBALS['egw']->link('/index.php',array('menuaction'=>'wiki.wiki_ui.search')).'" method="POST" class="noPrint searchBox">'.
+				'<input name="search" placeholder="search here..." value="'.Api\Html::htmlspecialchars($_REQUEST['search']).'" /> '.
+				'<input type="submit" name="go" value=""/>'.
+				'<a class="wikiHome" href="'.$this->viewURL($this->config['wikihome']).'"></a>'.
+				'<a class="recentChanges" href="'.$this->viewUrl('RecentChanges').'"></a>'.
+				'<a class="editButton'.(!$editable?" disabled":"").'" href="'.htmlspecialchars($this->editURL($page->name,$page->lang,$page->version)).'"></a>'.
+				'</form> '."\n";
+		}
+		else
+		{
+			$html .= '<form action="'.$GLOBALS['egw']->link('/index.php',array('menuaction'=>'wiki.wiki_ui.search')).'" method="POST" class="noPrint">'.
 			'<a href="'.$this->viewURL($this->config['wikihome']).'">'.$this->link_title($this->config['wikihome']).'</a> | '.
 			'<a href="'.$this->viewUrl('RecentChanges').'">'.lang('Recent Changes').'</a> | '.
-			'<input name="search" value="'.Api\Html::htmlspecialchars($_REQUEST['search']).'" /> '.
-			'<input type="submit" name="go" value="'.Api\Html::htmlspecialchars(lang('Search')).'" /></form>'."\n";
+				'<input name="search" value="'.Api\Html::htmlspecialchars($_REQUEST['search']).'" /> '.
+				'<input type="submit" name="go" value="'.Api\Html::htmlspecialchars(lang('Search')).'" /></form>'."\n";
+		}
 		$html .= "<hr />\n";
 
 		return $html;
@@ -306,13 +320,15 @@ class wiki_ui extends wiki_bo
 
 		if ($page)
 		{
-			$parts[] = $page->acl_check() ? '<a href="'.htmlspecialchars($this->editURL($page->name,$page->lang,$page->version)).'" class="noPrint">'.
-				($page->supercede == $page->time ? lang('Edit this document') : lang('Edit this <em>ARCHIVE VERSION</em> of this document')).'</a>' :
-				lang('This page can not be edited.');
+			if (!Api\Header\UserAgent::mobile())
+			{
+				$parts[] = $page->acl_check() ? '<a class="editButton" href="'.htmlspecialchars($this->editURL($page->name,$page->lang,$page->version)).'" class="noPrint">'.
+					($page->supercede == $page->time ? lang('Edit this document') : lang('Edit this <em>ARCHIVE VERSION</em> of this document')).'</a>' :
+					lang('This page can not be edited.');
 
-			$parts[] = '<a href="'.htmlspecialchars($this->historyURL($page->name,false,$page->lang)).'" class="noPrint">'.lang('View document history').'</a>';
-
-			$parts[] = lang('Document last modified').': '.html_time($page->time);
+				$parts[] = '<a class="viewButton" href="'.htmlspecialchars($this->historyURL($page->name,false,$page->lang)).'" class="noPrint">'.lang('View document history').'</a>';
+			}
+			$parts[] = '<span class="lastModified">'.lang('Document last modified').': '.html_time($page->time).'</span>';
 		}
 		return $parts ? "<hr />\n".implode('<span class="noPrint"> | </span>',$parts) : '';
 	}

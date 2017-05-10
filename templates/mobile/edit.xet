@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE overlay PUBLIC "-//EGroupware GmbH//eTemplate 2//EN" "http://www.egroupware.org/etemplate2.dtd">
+<!-- $Id$ -->
+<overlay>
+	<template id="wiki.edit" template="" lang="" group="0" version="17.1">
+		<grid width="100%">
+			<columns>
+				<column width="120"/>
+				<column/>
+			</columns>
+			<rows>
+				<row class="dialogHeadbar">
+					<hbox span="all" width="100%">
+						<button statustext="Save the changes and exit" id="action[save]"/>
+						<button statustext="Saves and continues editing" id="action[apply]"/>
+						<button statustext="Updates the preview" image="view_acc" id="action[preview]" background_image="1"/>
+						<button statustext="Deletes this page" id="action[delete]"/>
+						<button statustext="Converts the page to richtext" id="action[convert]"/>
+						<button statustext="Cancel without saving" id="action[cancel]"/>
+					</hbox>
+				</row>
+				<row>
+					<description value="Title"/>
+					<textbox statustext="different languages can have different titles" id="title" class="et2_fullWidth"/>
+				</row>
+				<row>
+					<description value="Name"/>
+					<textbox id="name" class="et2_fullWidth"/>
+				</row>
+				<row>
+					<description value="Lang"/>
+					<hbox>
+						<select id="lang" no_lang="1"/>
+						<button statustext="Loads the named page in the given language, all change so far get lost !!!" label="Load" id="action[load]"/>
+						<button statustext="Renames page to the given name and language" label="Rename" id="action[rename]"/>
+					</hbox>
+				</row>
+				<row>
+					<description value="Writable by"/>
+					<select-account statustext="who should be able to edit this page" id="writable" onchange="app.wiki.onchange_acl" no_lang="1" multiple="true" tags="true" account_type="groups" class="et2_fullWidth"/>
+				</row>
+				<row>
+					<description value="Readable by"/>
+					<select-account statustext="who should be able to read this page" id="readable" onchange="app.wiki.onchange_acl" no_lang="1" multiple="true" tags="true" account_type="groups" class="et2_fullWidth"/>
+				</row>
+				<row disabled="!@is_html">
+					<hbox width="99%">
+						<htmlarea id="text" options="@rtfEditorFeatures" height="320px" width="100%" expand_toolbar="true" base_href="$cont[upload_dir]" span="all" imageUpload="upload_dir"/>
+					</hbox>
+				</row>
+				<row disabled="@is_html">
+					<textbox multiline="true" id="text" rows="15" cols="120" span="all"/>
+				</row>
+				<row>
+					<description value="Summary"/>
+					<textbox statustext="Summary of change" id="summary"  class="et2_fullWidth"/>
+				</row>
+			</rows>
+		</grid>
+	</template>
+</overlay>
