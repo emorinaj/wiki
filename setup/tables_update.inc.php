@@ -7,7 +7,6 @@
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
  * @package wiki
  * @subpackage setup
- * @version $Id$
  */
 
 function wiki_upgrade0_9_15_001()
@@ -334,4 +333,10 @@ function wiki_upgrade1_9_003()
 function wiki_upgrade14_1()
 {
 	return $GLOBALS['setup_info']['wiki']['currentver'] = '16.1';
+}
+
+
+function wiki_upgrade16_1()
+{
+	return $GLOBALS['setup_info']['wiki']['currentver'] = '17.1';
 }

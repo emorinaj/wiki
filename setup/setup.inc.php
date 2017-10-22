@@ -7,12 +7,11 @@
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
  * @package wiki
  * @subpackage setup
- * @version $Id$
  */
 
 $setup_info['wiki']['name']      = 'wiki';
 $setup_info['wiki']['title']     = 'Wiki';
-$setup_info['wiki']['version']   = '16.1';
+$setup_info['wiki']['version']   = '17.1';
 $setup_info['wiki']['app_order'] = 11;
 $setup_info['wiki']['enable']    = 1;
 
@@ -49,5 +48,5 @@ $setup_info['wiki']['check_install'] = array(
 $setup_info['wiki']['depends'][] = array
 (
 	'appname'  => 'api',
-	'versions' => Array('16.1')
+	'versions' => Array('17.1')
 );
