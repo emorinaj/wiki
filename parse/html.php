@@ -1,6 +1,8 @@
 <?php
 // $Id$
 
+use EGroupware\Api;
+
 // These functions take wiki entities like 'bold_begin' or 'ref' and return
 //   HTML representing these entities.  They are used throught this script
 //   to generate appropriate HTML.  Together with the template scripts, they
@@ -252,7 +254,7 @@ function html_url($url, $text)
 		{
 			return $url;
 		}
-		$url = $GLOBALS['egw']->link(egw_vfs::download_url(substr($url,4)));
+		$url = $GLOBALS['egw']->link(Api\Vfs::download_url(substr($url,4)));
 		// remove protocol and host, browser might block it as insecure
 		if ($url[0] != '/') $url = preg_replace('|^https://[^:/]+/|', '/', $url);
 	}
