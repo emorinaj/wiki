@@ -16,7 +16,7 @@ $REMOTE_ADDR  = isset($_SERVER['REMOTE_ADDR'])
 $action       = isset($_GET['action'])
 								? $_GET['action'] : '';
 $page         = isset($_GET['page'])
-								? $_GET['page'] : ''; 
+								? $_GET['page'] : '';
 if (isset($_GET['lang']))
 {
 	$page = array(
@@ -129,4 +129,4 @@ if(!empty($ActionList[$action]))
 // Expire old versions, etc.
 $pagestore->maintain();
 
-$GLOBALS['egw']->common->egw_footer();
+echo $GLOBALS['egw']->framework->footer();
