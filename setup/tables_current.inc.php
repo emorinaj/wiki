@@ -47,7 +47,7 @@ $phpgw_baseline = array(
 	),
 	'egw_wiki_rate' => array(
 		'fd' => array(
-			'wiki_rate_ip' => array('type' => 'char','precision' => '20','nullable' => False,'default' => ''),
+			'wiki_rate_ip' => array('type' => 'ascii','precision' => '48','nullable' => False,'default' => ''),
 			'wiki_rate_time' => array('type' => 'int','meta' => 'timestamp','precision' => '4'),
 			'wiki_rate_viewLimit' => array('type' => 'int','precision' => '2'),
 			'wiki_rate_searchLimit' => array('type' => 'int','precision' => '2'),

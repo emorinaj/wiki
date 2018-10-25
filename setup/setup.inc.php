@@ -11,7 +11,7 @@
 
 $setup_info['wiki']['name']      = 'wiki';
 $setup_info['wiki']['title']     = 'Wiki';
-$setup_info['wiki']['version']   = '17.1';
+$setup_info['wiki']['version']   = '17.1.001';
 $setup_info['wiki']['app_order'] = 11;
 $setup_info['wiki']['enable']    = 1;
 
@@ -50,3 +50,4 @@ $setup_info['wiki']['depends'][] = array
 	'appname'  => 'api',
 	'versions' => Array('17.1')
 );
+

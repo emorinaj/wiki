@@ -340,3 +340,16 @@ function wiki_upgrade16_1()
 {
 	return $GLOBALS['setup_info']['wiki']['currentver'] = '17.1';
 }
+
+function wiki_upgrade17_1()
+{
+	$GLOBALS['egw_setup']->oProc->AlterColumn('egw_wiki_rate','wiki_rate_ip',array(
+		'type' => 'ascii',
+		'precision' => '48',
+		'nullable' => False,
+		'default' => ''
+	));
+
+	return $GLOBALS['setup_info']['wiki']['currentver'] = '17.1.001';
+}
+
