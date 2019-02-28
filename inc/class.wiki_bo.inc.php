@@ -45,9 +45,6 @@ require_once(EGW_INCLUDE_ROOT.'/wiki/parse/save.php');
 require_once(EGW_INCLUDE_ROOT.'/wiki/lib/category.php');
 require_once(EGW_INCLUDE_ROOT.'/wiki/lib/diff.php');
 
-@include_once('Text/Diff.php');
-@include_once('Text/Diff/Renderer/inline.php');
-
 class wiki_bo extends wiki_so
 {
 	var $config;
@@ -424,14 +421,6 @@ class wiki_bo extends wiki_so
 		);
 
 		// Get difference
-		if(class_exists('Text_Diff_Renderer_inline')) {
-			// PEAR gives nice inline diff
-			$diff     = new Text_Diff('auto', array(explode("\n",$old_page->text), explode("\n",$page->text)));
-			$renderer = new Text_Diff_Renderer_inline();
-			$values['Content'] = '<style>ins {color:green;} del {color:red}</style>'. htmlspecialchars_decode($renderer->render($diff));
-		}
-
-		// Fall back to whatever wiki can come up with
 		$diff = diff_parse(diff_compute($page->text, $old_page->text));
 		$values['Diff'] = parseText($diff,$GLOBALS['DiffEngine'],$values['Title']);
 

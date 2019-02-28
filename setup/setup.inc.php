@@ -38,7 +38,7 @@ $setup_info['wiki']['hooks']['search_link'] = 'wiki_hooks::search_link';
 
 // Setup
 $setup_info['wiki']['check_install'] = array(
-	'Text_Diff'	=> array(
+	'pear.horde.org/Horde_Text_Diff'	=> array(
 		'func'	=> 'pear_check',
 		'from'	=> 'Wiki (diff in notifications)'
 	)

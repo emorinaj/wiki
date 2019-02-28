@@ -1,29 +1,14 @@
 <?php
 // $Id$
 
+require_once(__DIR__ . '/../../vendor/autoload.php');
+
 // Compute the difference between two sets of text.
 function diff_compute($text1, $text2)
 {
-	global $TempDir, $DiffCmd, $ErrorCreatingTemp, $ErrorWritingTemp;
-
-	$temp1 = tempnam($TempDir, 'wiki_');
-	$temp2 = tempnam($TempDir, 'wiki_');
-
-	if(!($h1 = fopen($temp1, 'w')) || !($h2 = fopen($temp2, 'w')))
-		{ die($ErrorCreatingTemp); }
-
-	if(fwrite($h1, $text1) < 0 || fwrite($h2, $text2) < 0)
-		{ die($ErrorWritingTemp); }
-
-	fclose($h1);
-	fclose($h2);
-
-	$diff = `$DiffCmd $temp1 $temp2`;
-
-	unlink($temp1);
-	unlink($temp2);
-
-	return $diff;
+	$diff = new \Horde_Text_Diff('auto', array(explode("\n",$text1), explode("\n",$text2)));
+	$renderer = new \Horde_Text_Diff_Renderer_Unified();
+	return $renderer->render($diff);
 }
 
 // Parse diff output into nice HTML.
