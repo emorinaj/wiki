@@ -2,10 +2,12 @@
 <em>but</em> display at least this many entries in recentchanges and other subscription lists:	wiki	fr	<em>Mais</em> affiche au moins ces entrées dans les changements récents et autres listes de souscription :
 add document to category	wiki	fr	Ajouter un document à la catégorie
 added	wiki	fr	Ajouté
+administration	wiki	fr	Administration
 administration features are disabled for this wiki.	wiki	fr	Les options d'administration sont désactivées pour ce wiki.
 admins	wiki	fr	Administrateurs
 after how many days should old versions of a page be removed (0 for never)	admin	fr	Après combien de jours les anciennes versions de pages devraient être supprimées (0 pour jamais)
 allow anonymous access	admin	fr	Permettre les accès anonymes
+allow creating new pages (blank for all)	wiki	fr	Autoriser la création de nouvelles pages (vide pour tout)
 anonymous password	admin	fr	Mot de passe du compte "anonyme"
 anonymous session type	admin	fr	Type de session pour le compte "anonyme"
 anonymous username	admin	fr	Identifiant du compte "anonyme"
@@ -14,6 +16,7 @@ block	wiki	fr	Bloquer
 block / unblock hosts	common	fr	Bloquer / Débloquer les hôtes
 blocked ip address ranges	wiki	fr	Plage d'adresses IP bloquées
 cancel without saving	wiki	fr	Annuler sans enregistrer
+category	wiki	fr	Catégorie
 change notification	wiki	fr	Notification de changement
 changed	wiki	fr	Modifié
 changes by last author	wiki	fr	Changements par dernier auteur
@@ -32,6 +35,8 @@ difference between versions	wiki	fr	Différences entre les versions
 differences in	wiki	fr	Différences dans
 different languages can have different titles	wiki	fr	Différentes langues peuvent avoir différents titres
 document last modified	wiki	fr	Dernière modification du document
+done	wiki	fr	Terminé
+edit	wiki	fr	modifier
 edit box	wiki	fr	Boîte de modification
 edit this <em>archive version</em> of this document	wiki	fr	Modifier la<em>VERSION ARCHIVÉE</em> de ce document
 edit this document	wiki	fr	Modifier le document
@@ -47,6 +52,7 @@ enter ip address range in form <tt>12.*</tt>, <tt>34.56.*</tt>, or <tt>78.90.123
 error creating temporary file.	wiki	fr	Erreur en créant le fichier temporaire.
 error writing to temporary file.	wiki	fr	Erreur lors de l'écriture du fichier temporaire.
 everyone	wiki	fr	Tout le monde
+everything	wiki	fr	tout
 find	wiki	fr	Rechercher
 history	wiki	fr	Historique
 history display should show <em>all</em> changes made by the latest author.  otherwise, show only the last change made.	wiki	fr	L'historique devrait montrer <em>toutes</em> les modifications faites par le même auteur. Sinon seules les dernières modifications sont affichées.
@@ -63,6 +69,7 @@ lock / unlock pages	common	fr	Verrouiller / déverrouiller les pages
 locked	wiki	fr	Verrouillé
 message to send	wiki	fr	Message à envoyer
 name wiki home link	admin	fr	Nom du Wiki
+never	wiki	fr	jamais
 newer	wiki	fr	Plus récents
 no never	admin	fr	Non, jamais
 no only on request	admin	fr	Non, seulement sur demande
@@ -76,10 +83,10 @@ page content	wiki	fr	Contenu de la page
 pages i have read access	wiki	fr	Pages avec accès en lecture
 pages i have write access	wiki	fr	Pages avec accès en écriture
 pages that match this regular expression	wiki	fr	Pages respectant cette expression régulière
-path of the upload directory (has to be writable by the webserver!)	admin	fr	Chemin du répertoire de dépôt (le serveur web doit pouvoir y écrire!)
 person who changed the page	wiki	fr	Personne ayant modifié la page
-picture upload via richtext editor (leave the upload directory empty to disable the upload)	admin	fr	Dépôt d'image via un éditeur de texte enrichi (laisser le répertoire de dépôt vide pour désactiver le dépôt)
 please contact the %1administrator%2 for assistance.	wiki	fr	Veuillez contacter l'%1Administrateur%2 pour de l'assistance.
+please wait...	wiki	fr	Veuillez patienter...
+preferences	wiki	fr	Préférences
 preview	wiki	fr	Aperçu
 preview of current version	wiki	fr	Aperçu de la version actuelle
 rate control / ip blocking disabled	wiki	fr	Contrôle de fréquence / blocage adresse IP désactivé
@@ -90,22 +97,28 @@ recent changes	wiki	fr	Modifications récentes
 renames page to the given name and language	wiki	fr	Renomme la page avec le nom et la langue donnée
 richtext	wiki	fr	Texte enrichi
 rows	wiki	fr	Lignes
+save	wiki	fr	Enregistrer
 save the changes and exit	wiki	fr	Enregistrer les modifications et quitter
 saves and continues editing	wiki	fr	Enregistrer les modifications et continuer l'édition
-search for	wiki	fr	Chercher
+search	wiki	fr	Rechercher
+search for	wiki	fr	Recherche de
 see complete list (%1 entries)	wiki	fr	Voir la liste complète (%1 entrées)
 show a search	wiki	fr	Montrer une requête
 show the title of the wiki page	wiki	fr	Montrer le titre d'une page wiki
+site configuration	wiki	fr	Configuration du site
 summary	wiki	fr	Sommaire
 summary of change	wiki	fr	Résumé des changements
 the search returned no result!	wiki	fr	La requête n'a pas de résultat !
 this page can not be edited.	wiki	fr	Cette page ne peut pas être modifiée
+title	wiki	fr	Titre
 twin pages	wiki	fr	Pages jumelles
 unblock	wiki	fr	Débloquer
 updates the preview	wiki	fr	Met à jour la prévisualisation
+upload directory for pasted or dragged in images in egroupware vfs (filemanager).	wiki	fr	Répertoire d'upload pour les images collées ou déplacées vers le VFS EGroupware (gestionnaire de fichiers)
 url of the upload directory	admin	fr	URL du répertoire de dépôt
 use this module for displaying wiki-pages	wiki	fr	Utilisez ce module pour afficher les pages wiki
 users	wiki	fr	utilisateurs
+vfs upload directory	wiki	fr	Répertoire d'upload VFS
 view document history	wiki	fr	Voir l'historique du document
 visit %1 to set your user name	wiki	fr	Visitez %1 pour indiquer votre nom d'utilisateur
 warning: since you started editing, this document has been changed by someone else.  please merge your edits into the current version of this document.	wiki	fr	Attention: pendant que vous avez démarré l'édition, ce document a été modifié par quelqu'un d'autre. Veuillez svp fusionner vos modifications dans la version actuelle de ce document.
