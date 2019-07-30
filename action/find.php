@@ -1,5 +1,11 @@
 <?php
-// $Id$
+/**
+ * EGroupware Wiki
+ *
+ * @link http://www.egroupware.org
+ * @package wiki
+ * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
+ */
 
 require('parse/html.php');
 require(TemplateDir . '/find.php');
@@ -23,4 +29,3 @@ function action_find()
 		'pages' => $text)
 	);
 }
-?>

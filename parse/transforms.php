@@ -1,5 +1,11 @@
 <?php
-// $Id$
+/**
+ * EGroupware Wiki
+ *
+ * @link http://www.egroupware.org
+ * @package wiki
+ * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
+ */
 
 // The main parser components.  Each of these takes a line of text and scans it
 //   for particular wiki markup.  It converts markup elements to

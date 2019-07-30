@@ -1,5 +1,11 @@
 <?php
-// $Id$
+/**
+ * EGroupware Wiki
+ *
+ * @link http://www.egroupware.org
+ * @package wiki
+ * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
+ */
 
 require(TemplateDir . '/rss.php');
 require('parse/html.php');
@@ -56,5 +62,3 @@ function action_rss()
 	template_rss(array('itemseq'  => $itemseq,
 										 'itemdesc' => $itemdesc));
 }
-
-?>

@@ -1,5 +1,11 @@
 <?php
-// $Id$
+/**
+ * EGroupware Wiki
+ *
+ * @link http://www.egroupware.org
+ * @package wiki
+ * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
+ */
 
 use EGroupware\Api;
 
@@ -214,15 +220,15 @@ function html_timestamp($time)
 
 function html_url($url, $text)
 {
-	// egw: urls are relative to the egw install-dir and if they have only 2 parts (appname,image) they are resolved via
-	// common::image() - the template is taken into account
+	// Egw: urls are relative to the Egw install-dir and if they have only 2 parts (appname,image) they are resolved via
+	// Api\Image::find() - the template is taken into account
 	if (substr($url,0,4) == 'egw:')
 	{
 		$url = preg_replace('/egw:\\/?/i','',$url);
 		$parts = explode('/',$url);
 		if (count($parts) == 2 && preg_match('/(.jpe?g|.png|.gif|.bmp)$/i', $url))
 		{
-			$url = common::image($parts[0],$parts[1]);
+			$url = Api\Image::find($parts[0],$parts[1]);
 			// this deals with angles icon-thems
 			if (empty($url) && $parts[0] == 'email')
 			{
@@ -495,4 +501,3 @@ function html_split_name($page)
 											 '\\1 \\2', $title, -1);
 	return $page;
 }
-?>

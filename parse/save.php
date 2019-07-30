@@ -1,5 +1,11 @@
 <?php
-// $Id$
+/**
+ * EGroupware Wiki
+ *
+ * @link http://www.egroupware.org
+ * @package wiki
+ * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
+ */
 
 // Macros for on-save features.
 
@@ -98,5 +104,3 @@ function parse_define_sisterwiki($text)
 
 	return $text;
 }
-
-?>

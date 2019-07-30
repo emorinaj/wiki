@@ -1,5 +1,11 @@
 <?php
-// $Id$
+/**
+ * EGroupware Wiki
+ *
+ * @link http://www.egroupware.org
+ * @package wiki
+ * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
+ */
 
 // Master parser for 'Tavi.
 function parseText($text, $parsers, $object_name)
@@ -33,5 +39,3 @@ function parseText($text, $parsers, $object_name)
 
 	return $result . $line;
 }
-
-?>
