@@ -1,5 +1,11 @@
 <?php
-// $Id$
+/**
+ * EGroupware Wiki
+ *
+ * @link http://www.egroupware.org
+ * @package wiki
+ * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
+ */
 
 require('parse/main.php');
 require('parse/macros.php');
@@ -25,4 +31,3 @@ function action_diff()
 											'editable'  => $p2->acl_check(),
 											'timestamp' => $p2->time));
 }
-?>

@@ -1,5 +1,11 @@
 <?php
-// $Id$
+/**
+ * EGroupware Wiki
+ *
+ * @link http://www.egroupware.org
+ * @package wiki
+ * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
+ */
 
 // Don't freak out lib/init.php.
 $document = $categories = $comment = $page = '';
@@ -62,7 +68,7 @@ if($locking)                            // Locking/unlocking pages.
 {
 	if(empty($Save))                      // Not saving results; display form.
 	{
-		common::egw_header();
+		echo $GLOBALS['egw']->framework->header();
 
 		$html = html_lock_start();
 		$pagelist = $pagestore->allpages();
@@ -106,7 +112,7 @@ if($locking)                            // Locking/unlocking pages.
 }
 else if($blocking)                      // Blocking/unblocking IP addrs.
 {
-	common::egw_header();
+	echo $GLOBALS['egw']->framework->header();
 	if($Block || $Unblock)                // Block/unblock an address group.
 	{
 		if(!empty($Block))
@@ -135,12 +141,12 @@ else if($blocking)                      // Blocking/unblocking IP addrs.
 }
 else                                    // Display main menu for admin.
 {
-	common::egw_header();
+	echo $GLOBALS['egw']->framework->header();
 
 	template_admin(array('html' => html_url($AdminScript . '&locking=1',
-																					lang('Lock / unlock pages')) .
-																 html_newline() .
-																 html_url($AdminScript . '&blocking=1',
-																					lang('Block / unblock hosts')) .
-																 html_newline()));
+		lang('Lock / unlock pages')) .
+		html_newline() .
+		html_url($AdminScript . '&blocking=1',
+		lang('Block / unblock hosts')) .
+		html_newline()));
 }
