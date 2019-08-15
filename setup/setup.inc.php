@@ -36,6 +36,9 @@ $setup_info['wiki']['hooks'][] = 'config_validate';
 $setup_info['wiki']['hooks']['settings'] = 'wiki_hooks::settings';
 $setup_info['wiki']['hooks']['search_link'] = 'wiki_hooks::search_link';
 
+// uncomment to automatic deinstall wiki, if it only contains the 3 default pages
+//$setup_info['wiki']['autodeinstall'] = "SELECT COUNT(*)<=3 FROM egw_wiki_pages";
+
 // Setup
 $setup_info['wiki']['check_install'] = array(
 	'pear.horde.org/Horde_Text_Diff'	=> array(
