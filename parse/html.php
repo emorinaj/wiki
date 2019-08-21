@@ -226,7 +226,7 @@ function html_url($url, $text)
 	{
 		$url = preg_replace('/egw:\\/?/i','',$url);
 		$parts = explode('/',$url);
-		if (count($parts) == 2 && preg_match('/(.jpe?g|.png|.gif|.bmp)$/i', $url))
+		if (count($parts) == 2 && preg_match('/(.jpe?g|.png|.gif|.bmp|.svg)$/i', $url))
 		{
 			$url = Api\Image::find($parts[0],$parts[1]);
 			// this deals with angles icon-thems
@@ -251,7 +251,7 @@ function html_url($url, $text)
 		// remove protocol and host, browser might block it as insecure
 		if ($url[0] != '/') $url = preg_replace('|^https://[^:/]+/|', '/', $url);
 	}
-	$is_image = preg_match('/(.jpe?g|.png|.gif|.bmp)$/i', $url);
+	$is_image = preg_match('/(.jpe?g|.png|.gif|.bmp|.svg)$/i', $url);
 
 	// vfs: urls are urls into the eGW VFS
 	if (substr($url,0,4) == 'vfs:')
