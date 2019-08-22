@@ -75,9 +75,7 @@ page content	wiki	sk	Obsah stránky
 pages i have read access	wiki	sk	Stránky ku ktorým mám právo na čítanie
 pages i have write access	wiki	sk	Stránky ku ktorým mám právo zápisu
 pages that match this regular expression	wiki	sk	Stránky ktoré spĺňajú tento regulérny výraz
-path of the upload directory (has to be writable by the webserver!)	admin	sk	Cesta k adresáru pre odovzdanie (musí byť zapisovateľný webserverom!)
 person who changed the page	wiki	sk	Osoba ktorá zmenila túto stránku
-picture upload via richtext editor (leave the upload directory empty to disable the upload)	admin	sk	Odovzdanie obrázku cez richedit editor (ak chcete zakázať odovzdávanie, ponechajte adresár pre odovzdanie prázdny)
 please contact the %1administrator%2 for assistance.	wiki	sk	Prosím kontaktujte %1Správcu%2 o pomoc.
 preview	wiki	sk	Náhľad
 preview of current version	wiki	sk	Náhľad súčasnej verzie
@@ -102,6 +100,7 @@ this page can not be edited.	wiki	sk	Táto stránka sa nedá upravovať.
 twin pages	wiki	sk	Dvojité stránky
 unblock	wiki	sk	Odblokovať
 updates the preview	wiki	sk	Aktualizuje náhľad
+upload directory for pasted or dragged in images in egroupware vfs (filemanager).	wiki	sk	Priečinok pre uloženie obrázkov ktoré boli vložené alebo potiahnuté, v EGroupware VFS (správca súborov).
 url of the upload directory	admin	sk	URL adresa adresára pre odovzdanie
 use this module for displaying wiki-pages	wiki	sk	Použiť tento modul pre zobrazovanie stránok wiki
 users	wiki	sk	používatelia
