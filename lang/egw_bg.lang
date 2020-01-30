@@ -1,182 +1,124 @@
-"%2" only valid for start date and due date.  use "%1".	tracker	bg	„%2“ важи само за начална дата и дата на плащане. Използвайте "%1".
-%1 days in advance	tracker	bg	%1 дена предварително
-%1 entries %2	tracker	bg	%1 записа %2
-%1 entries %2, %3 failed because of insufficent rights !!!	tracker	bg	%1 записа %2, %3 не беше успешно поради недостатъчни права!
-%1 entries updated.	tracker	bg	Актуализирани са %1 записа.
-%1 is due %2	tracker	bg	%1 се дължи на %2
-%1 is starting %2	tracker	bg	%1 започва %2
-%1 tickets have been converted	tracker	bg	Преобразувани са %1 билети.
-(new tickets as	tracker	bg	Нови билети като
---> choose a project from the drop-down list	tracker	bg	--> изберете проект от падащия списък
---> enter new name	tracker	bg	--> въведете ново име
-1 - lowest	tracker	bg	1 - най-ниско
-2 days in advance	tracker	bg	2 дни предварително
-2 years ago	tracker	bg	преди 2 години
-3 days in advance	tracker	bg	3 дни предварително
-3 years ago	tracker	bg	преди 3 години
-5 - medium	tracker	bg	5 - средно
-9 - highest	tracker	bg	9 - най-високо
-accepted	tracker	bg	Прието
-acl	tracker	bg	Списък за контрол на достъпа
-add / remove link	tracker	bg	Добавяне / Премахване на връзка (линк)
-add a ticket	tracker	bg	Добавете билет
-add additionally	tracker	bg	Добавете допълнително
-add comment	tracker	bg	Добавете коментар
-add email-address	tracker	bg	Добавете имейл адрес
-add from addressbook	tracker	bg	Добавете от Адресния указател
-add restricted comment	tracker	bg	Добавете ограничаващ коментар
-add timesheet entry	tracker	bg	Добави запис в Графика
-add to	tracker	bg	Добави към
-add unrecognized mail address to the cc field	tracker	bg	Добавете непознат имейл адрес в CC полето
-after	tracker	bg	След
-all	tracker	bg	Всички
-all tickets are already converted to tracker	tracker	bg	Всички билети вече са преобразувани в Tracker
-all versions	tracker	bg	Всички версии
-allow creating of restricted comments which are only visible for admins, technicians and assigned users	tracker	bg	Позволява създаване на ограничаващи коментари, които да са видими само за администратори, техници и упълномощени потребители
-allow default projects for tracker	tracker	bg	Проекти по подразбиране
-allow editing by	tracker	bg	Разреши редактиране от
-allow to assign groups to tracker items	tracker	bg	Разрешаване на упълномощени групи
-allow voting	tracker	bg	Разрешаване на гласуване
-application mail expected but got: %1	tracker	bg	Очаква се имейл, но получих: %1
-applies the changes	tracker	bg	Приложи промените
-assigned to	tracker	bg	Възлага се на
-attachments & links	tracker	bg	Прикачени файлове и връзки (линкове)
-attention: no contact with address %1 found.	tracker	bg	Внимание! Не е намерен контакт с адрес %1.
-autoassign to	tracker	bg	Автоматично възлагане на
-automatic email handling	tracker	bg	Автоматична обработка на имейл
-automatic mails (bounces) are configured to be forwarded	tracker	bg	автоматичните писма (за отхвъляне) са конфигурирани да бъдат препращани
-automatic mails (replies) are configured to be forwarded	tracker	bg	автоматичните писма (за обратна връзка) са конфигурирани да бъдат препращани
-automatically created by importexport	tracker	bg	Автоматично създадено от importexport
-before	tracker	bg	Преди
-canned response	tracker	bg	Предварително готов отговор
-canned responses	tracker	bg	Предварително готови отговори
-categories, versions, canned responses	tracker	bg	Категории, версии, готови отговори
-category	tracker	bg	Категория
-category for new tickets	tracker	bg	Категория за нов билет
-change color	tracker	bg	Промяна на цвета
-change group	tracker	bg	Промяна на група
-change group when updating	tracker	bg	Промяна на групата при актуализиране
-change owner when updating	tracker	bg	Промяна на собственика при актуализиране
-changes made below will be lost, if not applied before!	tracker	bg	Промените, направени по-долу, ще бъдат загубени, ако преди това не бъдат приложени!
-check all	tracker	bg	Маркира всички
-check mail interval	tracker	bg	Проверете пощенския интервал
-choose 'creator' of imported data	tracker	bg	Изберете „създател“ на импортирани данни
-choose a project from the drop-down list	tracker	bg	Изберете проект от падащия списък
-closed	tracker	bg	Закрит
-closed date	tracker	bg	Закрита дата
-color	tracker	bg	Цвят
-comment by %1 at %2:	tracker	bg	Коментар от %1 на %2:
-comments	tracker	bg	Коментари
-completed	tracker	bg	Приключен
-configuration	tracker	bg	Конфигуриране
-configuration updated.	tracker	bg	Конфигурацията е актуализирана
-configuration, notifications	tracker	bg	Конфигурация, Известия
-confirmed	tracker	bg	Потвърден
-convert all closed tickets	tracker	bg	Преобразуване на всички затворени билети
-convert all open tickets	tracker	bg	Преобразуване на всички отворени билети
-converted count	tracker	bg	Конвертирано преброяване
-copy to	tracker	bg	Копиране в
-copy your changes to the clipboard, %1reload the entry%2 and merge them.	tracker	bg	Копирайте измеменията в клипборда, %1 презаредете записа %2 и ги обединете.
-could not connect	tracker	bg	не може да се свърже
-create new links	tracker	bg	Създаване на нови връзки
-create new tracker entry's as default "private" for approval process	tracker	bg	Създайте нов запис за проследяване като "частен" по подразбиране за процеса на одобрение
-created	tracker	bg	Създаден
-created by	tracker	bg	Създаден от
-created on	tracker	bg	Създаден на
-creates a new field	tracker	bg	създава ново поле
-creation date	tracker	bg	Дата на създаване
-creator	tracker	bg	Създател
-custom fields	tracker	bg	Полета по избор
-custom notifications	tracker	bg	Персонализирани известия
-custom tracker priorities	tracker	bg	Приоритети на персонализирания тракер
-customfield	tracker	bg	Полета по избор
-data exchange settings	tracker	bg	Настройки за обмен на данни
-date filter	tracker	bg	Филтър за дата
-date opened	tracker	bg	Дата на отваряне
-default document to insert entries	tracker	bg	Документ по подразбиране за въвеждане на записи
-default version for new tracker entries	tracker	bg	Версия по подразбиране за нови записи в тракер
-define escalations	common	bg	Определете покачвания
-delete mails from server	tracker	bg	Изтриване на имейли от сървъра
-delete the mail from the server	tracker	bg	Изтриване на пощата от сървъра
-delete the mail from the server.	tracker	bg	Изтриване на пощата от сървъра.
-delete this canned response	tracker	bg	Изтриване на предварително зададен , "готов отговор"
-delete this category	tracker	bg	Изтриване на тази категория
-delete this entry	tracker	bg	Изтриване на този запис
-delete this status	tracker	bg	Изтриване на този статус
-delete this tracker including all its items and categories	tracker	bg	Изтрийте този тракер, заедно с всичките му елементи и категории
-delete this version	tracker	bg	Изтриване на тази версия
-deleted	tracker	bg	Изтрит
-deletes this field	tracker	bg	Изтрива това поле
-determines the order the fields are displayed	tracker	bg	Определя реда за показване на полетата
-directory with documents to insert entries	tracker	bg	Директория с документи за въвеждане на записи
-do not send notifications to external email (cc field)	tracker	bg	Не изпращайте известия на външен имейл (cc field)
-do you want a notification, if items you are responsible for are about to start?	tracker	bg	Желаете ли известие преди началото на задачи, за които отговаряте?
-do you want a notification, if items you are responsible for are due?	tracker	bg	Желаете ли известие при достигане на крайния срок за задачи, за които отговаряте?
-do you want to add mailheader information to description and/or comments?	tracker	bg	Искате ли да добавите информация за Mailheader към Описание и/или Коментари?
-donator name to show	tracker	bg	Да се покаже името на дарителя
-download url for links	tracker	bg	Изтеглете URL адреса за връзки
-due date	tracker	bg	Крайна дата
-duplicate	tracker	bg	Копие
-e-mail address to which a copy of all tracker-notifications should be send	tracker	bg	Имейл адрес, на който трябва да се изпрати копие от всички известия за проследяване
-e-mail notifications	tracker	bg	Имейл известия
-each value is a line like <id>[=<label>]	tracker	bg	всяка стойност е ред във формат <id>[=<label>]
-each value is a line like id[=label]	tracker	bg	всяка стойност е ред във формат id[=label]
-edit %1	tracker	bg	Редактиране на %1
-edit entry	tracker	bg	Редактиране на записа
-edit others' comments	tracker	bg	Редактиране коментарите на другите
-edit own comments	tracker	bg	Редактиране на собствени коментари
-email address to contact you	tracker	bg	Имейл адрес за връзка с вас
-email handling can be configured only for all trackers	tracker	bg	Обработката на имейли може да бъде конфигурирана единствено за всички тракери.
-enable color code for	tracker	bg	Активиране на цветовия код за
-enter an email address here if unrecognized mails should be forwarded	tracker	bg	Въведете имейл адрес, ако неразпознати имейли трябва да бъдат препратени
-entry saved	tracker	bg	Записът е запазен
-error saving the entry!!!	tracker	bg	Грешка при запис!!!
-error: the entry has been updated since you opened it for editing!	tracker	bg	Грешка: записът е бил актуализиран, след като сте го отворили за редакция!
-existing links	tracker	bg	Съществуващи връзки
-export as csv	tracker	bg	Експорт в CSV
-forward	tracker	bg	Препращане
-forward to	tracker	bg	препрати до
-from	tracker	bg	От
-general fields:	tracker	bg	Общи полета:
-history	tracker	bg	История
-id	tracker	bg	ИД
-insert in document	tracker	bg	Вмъкване в документа
-last modified	tracker	bg	Последно модифициран
-last modified by	tracker	bg	Последно модифициран от
-last month	tracker	bg	Миналия месец
-last week	tracker	bg	Миналата седмица
-last year	tracker	bg	Миналата година
-leaves without saveing	tracker	bg	изход без запис
-length<br>rows	tracker	bg	Дължина<br>Редове
-links	tracker	bg	Връзки
-manage mapping	tracker	bg	Управление на съответствията
-max length of the input [, length of the inputfield (optional)]	tracker	bg	макс. дължина на входа[, дължнина на вх.поле (опция)]
-name of current user, all other contact fields are valid too	tracker	bg	Име на текущия потребител, останалите полета на контакта също са валидни
-new %1	tracker	bg	Нов %1
-number of row for a multiline inputfield or line of a multi-select-box	tracker	bg	Брой редове за многоредово текстово поле или множествен избор
-one day after	tracker	bg	един ден по-късно
-one day in advance	tracker	bg	един ден предварително
-open(status)	tracker	bg	отвори
-order	tracker	bg	Ред
-overdue	tracker	bg	просрочен
-permission denied !!!	tracker	bg	Достъпът отказан !!!
-rejected	tracker	bg	Отказано
-responsible	tracker	bg	отговорен
-same day	tracker	bg	същия ден
-saves the changes made and leaves	tracker	bg	запазва направените промени и излиза
-select one...	tracker	bg	изберете едно...
-signature	tracker	bg	Подпис
-state	tracker	bg	Област / Щат
-summary	tracker	bg	Обобщение
-the name used internaly (<= 20 chars), changeing it makes existing data unavailible	tracker	bg	името, използвано в системата (до 20 символа) Промяната му прави съществуващите данни недостъпни
-the text displayed to the user	tracker	bg	текстът, показван на потребителя
-this month	tracker	bg	Този месец
-this week	tracker	bg	Тази седмица
-this year	tracker	bg	Тази година
-times	tracker	bg	Времена
-type of customfield	tracker	bg	Тип на полето по избор
-upcoming	tracker	bg	предстоящ
-updated	tracker	bg	Актуализиран
-yes, with larger fontsize	tracker	bg	Да, с по-голям размер на шрифта
-yesterday	tracker	bg	Вчера
-you can respond by visiting:	tracker	bg	За преглед посетете:
+(don't offer the possibility)	admin	bg	Не предлагайте възможността
+<em>but</em> display at least this many entries in recentchanges and other subscription lists:	wiki	bg	<em>Но</em> покажете поне тези много записи в RecentChanges и други абонаментни списъци:
+add document to category	wiki	bg	Добавяне на документ към категорията
+added	wiki	bg	Добавен
+administration features are disabled for this wiki.	wiki	bg	Функциите на администрацията са деактивирани за тази wiki.
+admins	wiki	bg	Администратори
+after how many days should old versions of a page be removed (0 for never)	admin	bg	След колко дни трябва да бъдат премахнати стари версии на страница, 0 = никога.
+allow anonymous access	admin	bg	Разрешаване на анонимен достъп
+allow creating new pages (blank for all)	wiki	bg	Разрешаване на създаване на нови страници (празно за всички)
+anonymous password	admin	bg	Анонимна парола
+anonymous session type	admin	bg	Вид анонимна сесия
+anonymous username	admin	bg	Анонимно потребителско име
+automatically convert pages with wiki-syntax to richtext (if edited)?	admin	bg	Автоматично преобразуване на страници с wiki синтаксис в "богат текст", само ако е редактиран?
+block	wiki	bg	Блокиране
+block / unblock hosts	common	bg	Блокиране | Разблокиране на хостове
+blocked ip address ranges	wiki	bg	Блокирани диапазони на IP адреси
+cancel without saving	wiki	bg	Затвори без запазване
+change notification	wiki	bg	Промени известието
+changed	wiki	bg	Променено
+changes by last author	wiki	bg	Променено от последния автор
+choose your current time here, so the server may figure out what time zone you are in.	wiki	bg	Изберете текущото си време.
+columns	wiki	bg	Колони
+compute difference	wiki	bg	Изчислете разликата
+converts the page to richtext	wiki	bg	Преобразува страницата в "богат текст"
+current version	wiki	bg	Сегашна версия
+default read permission	wiki	bg	Разрешение за четене по подразбиране
+default read permissions for creating a new page	preferences	bg	Разрешения за четене по подразбиране за създаване на нова страница
+default write permission	preferences	bg	Разрешение за писане по подразбиране
+default write permissions for creating a new page	preferences	bg	Разрешения за писане по подразбиране за създаване на нова страница
+deleted	wiki	bg	Изтрит
+deletes this page	wiki	bg	Изтрива тази страница
+difference between versions	wiki	bg	Разлика между версиите
+differences in	wiki	bg	Разлики в / във...
+different languages can have different titles	wiki	bg	Различните езици могат да имат различни заглавия
+document last modified	wiki	bg	Последна промяна на документа
+edit box	wiki	bg	Поле за редактиране
+edit this <em>archive version</em> of this document	wiki	bg	Редактирайте тази <em> АРХИВНА ВЕРСИЯ </em> на този документ
+edit this document	wiki	bg	Редактиране на този документ
+edit with preview	admin	bg	Редактиране с визуализация
+editable	admin	bg	Може да се редактира
+editing	wiki	bg	Редактиране
+emailaddress administrator	admin	bg	Имейл адрес на администратора
+enable free links	admin	bg	Активиране на свободни връзки (линкове)
+enable wiki links	admin	bg	Активиране на връзки (линкове) към Wiki
+enter here the maximum number of entries to display in a document's history list.	wiki	bg	Максимален брой записи за показване в списъка с историята на документа.
+enter here the number of days of edits to display on recentchanges or any other subscription list.  set this to zero if you wish to see all pages in recentchanges, regardless of how recently they were edited.	wiki	bg	Брой дни за редакции, които да се показват в RecentChanges или друг списък с абонаменти. 0 = Покажи всички.
+enter ip address range in form <tt>12.*</tt>, <tt>34.56.*</tt>, or <tt>78.90.123.*</tt>	wiki	bg	Въведете диапазона на IP адреси под формата <tt> 12. * </tt>, <tt> 34.56. * </tt> или <tt> 78.90.123. * </tt>
+error creating temporary file.	wiki	bg	Грешка при създаването на временен файл.
+error writing to temporary file.	wiki	bg	Грешка при писането на временния файл
+everyone	wiki	bg	Всеки
+find	wiki	bg	Намери
+history	wiki	bg	История
+history display should show <em>all</em> changes made by the latest author.  otherwise, show only the last change made.	wiki	bg	Екранът на историята показва <em> всички </em> промени, направени от най-новия автор. В противен случай, покажете само последната направена промяна.
+history lists	wiki	bg	Списъци с история
+history of	wiki	bg	Историята на
+if a page i have read access to is changed, send a notification	wiki	bg	Ако страница, до която имам достъп за четене е променена, изпратете известие
+if a page i have write access to is changed, send a notification	wiki	bg	Ако страница, до която имам достъп за запис е променена, изпратете известие
+invalid page name.	wiki	bg	Невалидно име на страницата!
+load	wiki	bg	Зареждане
+loads the named page in the given language, all change so far get lost !!!	wiki	bg	Зарежда посочената страница на избран език, всички промени досега се губят!
+lock / unlock pages	common	bg	Заключване | Отключване на страници
+locked	wiki	bg	Заключен
+message to send	wiki	bg	Съобщение за изпращане
+name wiki home link	admin	bg	Име на домашната връзка (линк) на Wiki
+newer	wiki	bg	По-нови
+no never	admin	bg	Не, никога
+no only on request	admin	bg	Не, само при поискване
+not set	wiki	bg	Не е зададено
+older	wiki	bg	По-стари
+on all pages	wiki	bg	На всички страници
+only if browser supports a richtext-editor	admin	bg	Само ако браузърът поддържа "богат текстов редактор"
+only on the first page	wiki	bg	Само на първата страница
+page '%1' not found !!!	wiki	bg	Страница '%1' не е намерена!
+page content	wiki	bg	Съдържание на страницата
+pages i have read access	wiki	bg	Страници, до които имам достъп за четене
+pages i have write access	wiki	bg	Страници, до които имам достъп за запис
+pages that match this regular expression	wiki	bg	Страници, които съответстват на този редовен израз
+person who changed the page	wiki	bg	Личност, която е променила страницата
+please contact the %1administrator%2 for assistance.	wiki	bg	Моля, свържете се с %1Administrator%2 за съдействие.
+preview	wiki	bg	Визуализация
+preview of current version	wiki	bg	Визуализация на текущата версия
+rate control / ip blocking disabled	wiki	bg	Контрол на стойността | IP блокирането е деактивирано
+readable by	wiki	bg	Четимо от
+readonly	admin	bg	Прочети само ако...
+rebuild links	wiki	bg	Възстановете връзки (линкове)
+recent changes	wiki	bg	Скорошни промени
+renames page to the given name and language	wiki	bg	Преименува страница на даденото име и език
+richtext	wiki	bg	"Богат текст"
+rows	wiki	bg	Редове
+save the changes and exit	wiki	bg	Запазете промените и излезте
+saves and continues editing	wiki	bg	Запази и продължи с редактирането
+search for	wiki	bg	Търси
+see complete list (%1 entries)	wiki	bg	Вижте пълен списък, %1 записи
+show a search	wiki	bg	Покажи търсеното
+show the title of the wiki page	wiki	bg	Покажете заглавието на wiki страницата
+summary	wiki	bg	Обобщение
+summary of change	wiki	bg	Обобщение на промяната
+the search returned no result!	wiki	bg	Търсенето е без резултат!
+this page can not be edited.	wiki	bg	Тази страница не може да бъде редактирана!
+twin pages	wiki	bg	Еднакви страници
+unblock	wiki	bg	Отблокиране
+updates the preview	wiki	bg	Актуализира визуализацията
+upload directory for pasted or dragged in images in egroupware vfs (filemanager).	wiki	bg	Качване на директория за копирани или плъзгани изображения в EGroupware VFS (filemanager).
+url of the upload directory	admin	bg	URL адрес на директорията за качване
+use this module for displaying wiki-pages	wiki	bg	Използвайте този модул за показване на wiki страници
+users	wiki	bg	Потребители
+view document history	wiki	bg	Вижте историята на документите
+visit %1 to set your user name	wiki	bg	Посетете %1, за да зададете потребителското си име
+warning: since you started editing, this document has been changed by someone else.  please merge your edits into the current version of this document.	wiki	bg	Внимание: Документът е променен от някой друг, откакто сте започнали да редактирате. Обединете редакциите си в текущата версия на този документ.
+who should be able to edit this page	wiki	bg	Кой трябва да има достъп за редактиране на тази страница?
+who should be able to read this page	wiki	bg	Кой трябва да има достъп за четене на тази страница?
+wiki	common	bg	Wiki / Уикипедия
+wiki administration	wiki	bg	Администрация на Wiki
+wiki menu	wiki	bg	Меню на Wiki
+wiki startpage	wiki	bg	Начална страница на Wiki
+writable by	wiki	bg	Написано от
+yes always	admin	bg	Да, винаги
+yes with navbar	admin	bg	Да, с навигация
+you have been denied access to this site.	wiki	bg	Нямате достъп до този сайт
+you have entered an invalid user name.	wiki	bg	Въвели сте невалидно потребителско име
+you have exeeded the number of pages you are allowed to visit in a given period of time. please return later.	wiki	bg	Превишили сте броя на страниците, които ви е разрешено да посещавате за даден период от време. Моля, върнете се по-късно.
+you have no rights to view wiki content !!!	wiki	bg	Нямате права да гледате wiki съдържание!
+your changes	wiki	bg	Вашите промени
+your user name is "%1".	wiki	bg	Вашето потребителско име е "% 1".
