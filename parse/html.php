@@ -289,7 +289,7 @@ function html_url($url, $text)
 			htmlspecialchars($url).'" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="'.
 			$widht.'" height="'.$height.'"></embed></object>';
 	}
-	if ($text{0} == '[' && substr($text,-1) == ']' && !is_numeric($t=substr($text,1,-1))) $text = $t;
+	if ($text[0] == '[' && substr($text,-1) == ']' && !is_numeric($t=substr($text,1,-1))) $text = $t;
 
 	return '<a href="'.$url.'" '.($onClick ? $onClick : 'target="_blank"').">$text</a>";
 }
