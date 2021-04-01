@@ -58,11 +58,11 @@ if (!isset($config['ExpireLen']))
 $GLOBALS['egw_info']['flags']['nonavbar'] = $config['allow_anonymous'] &&
 	$config['anonymous_username'] == $GLOBALS['egw_info']['user']['account_lid'];
 
-$HomePage = (isset($config[wikihome])?$config[wikihome]:'eGroupWare');
-$InterWikiPrefix = (isset($config[InterWikiPrefix])?$config[InterWikiPrefix]:'EGroupWare');
-$EnableFreeLinks = (isset($config[Enable_Free_Links])?$config[Enable_Free_Links]:1);
-$EnableWikiLinks = (isset($config[Enable_Wiki_Links])?$config[Enable_Wiki_Links]:1);
-$EditWithPreview = (isset($config[Edit_With_Preview])?$config[Edit_With_Preview]:1);
+$HomePage = (isset($config['wikihome'])?$config['wikihome']:'EGroupware');
+$InterWikiPrefix = (isset($config['InterWikiPrefix'])?$config['InterWikiPrefix']:'EGroupWare');
+$EnableFreeLinks = (isset($config['Enable_Free_Links'])?$config['Enable_Free_Links']:1);
+$EnableWikiLinks = (isset($config['Enable_Wiki_Links'])?$config['Enable_Wiki_Links']:1);
+$EditWithPreview = (isset($config['Edit_With_Preview'])?$config['Edit_With_Preview']:1);
 $ExpireLen = $config['ExpireLen'];
 
 $UserName = $GLOBALS['egw_info']['user']['account_lid'];
@@ -90,7 +90,7 @@ $TempDir = $GLOBALS['egw_info']['server']['temp_dir'];
 require('lib/url.php');
 require('lib/messages.php');
 
-$pagestore =& CreateObject('wiki.wiki_so');
+$pagestore = new wiki_so();
 
 $FlgChr = chr(255);                     // Flag character for parse engine.
 

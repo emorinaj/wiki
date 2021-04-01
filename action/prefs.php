@@ -23,11 +23,9 @@ function action_prefs()
 				{ die($ErrorNameMatch); }
 		}
 
-		ereg("([[:digit:]]*)", $rows, $result);
-		if(($rows = $result[1]) <= 0)
+		if(!preg_match("/([[:digit:]]*)/", $rows, $result) || ($rows = $result[1]) <= 0)
 			{ $rows = 20; }
-		ereg("([[:digit:]]*)", $cols, $result);
-		if(($cols = $result[1]) <= 0)
+		if(!preg_match("/([[:digit:]]*)/", $rows, $result) || ($cols = $result[1]) <= 0)
 			{ $cols = 65; }
 		if(strcmp($auth, "") != 0)
 			{ $auth = 1; }

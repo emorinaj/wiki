@@ -75,7 +75,7 @@ class wiki_ui extends wiki_bo
 			$content['version'] = $_GET['version'];
 			$start = True;
 		}
-		$action = @key($content['action']);
+		$action = is_array($content['action']) ? key($content['action']) : null;
 		if (empty($content['name']))
 		{
 			Api\Egw::redirect_link('/wiki/');
