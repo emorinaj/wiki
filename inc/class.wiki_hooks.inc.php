@@ -172,10 +172,15 @@ $$Content$$'
 		unset($hook_data);	// not used, but required by function signature
 
 		$appname = 'wiki';
+		$config = Api\Config::read($appname);
 		$menu_title = lang('Wiki Menu');
 		$file = Array(
+
+			'Wiki startpage' => $GLOBALS['egw']->link('/index.php', ['menuaction' => 'wiki.wiki_ui.view', 'page' => $config['wikihome'] ?? 'eGroupWare']),
 			'Recent Changes' => $GLOBALS['egw']->link('/wiki/index.php','page=RecentChanges'),
+			'Add' => $GLOBALS['egw']->link('/index.php', ['menuaction' => 'wiki.wiki_ui.edit', 'page' => lang('New')]),
 		);
+		display_sidebox($appname,$menu_title,$file);
 
 		if ($GLOBALS['egw_info']['user']['apps']['admin'])
 		{
