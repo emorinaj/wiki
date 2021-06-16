@@ -8,6 +8,7 @@
  * @version $Id$
  */
 
+import {AppJS} from "../../api/js/jsapi/app_base.js";
 /**
  * Javascript for wiki
  *
