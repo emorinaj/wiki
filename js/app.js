@@ -4,8 +4,7 @@
  * @link http://www.egroupware.org
  * @package wiki
  * @author Ralf Becker
- * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
- * @version $Id$
+ * @license https://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
  */
 
 import {AppJS} from "../../api/js/jsapi/app_base.js";
@@ -14,7 +13,7 @@ import {AppJS} from "../../api/js/jsapi/app_base.js";
  *
  * @augments AppJS
  */
-app.classes.wiki = (function(){ "use strict"; return AppJS.extend(
+app.classes.wiki = AppJS.extend(
 {
 	/**
 	 * application name
@@ -36,7 +35,7 @@ app.classes.wiki = (function(){ "use strict"; return AppJS.extend(
 			// add target _blank to all external links, as our content security policy will prevent them otherwise
 			jQuery('a').click(function()
 			{
-				if (this.href.substr(0, 1+window.location.origin.length) != window.location.origin+'/')
+				if (this.href.substr(0, 1+window.location.origin.length) !== window.location.origin+'/')
 				{
 					this.target = '_blank';
 				}
@@ -81,4 +80,4 @@ app.classes.wiki = (function(){ "use strict"; return AppJS.extend(
 			_widget.set_value('_0');
 		}
 	}
-});}).call(this);
+});
